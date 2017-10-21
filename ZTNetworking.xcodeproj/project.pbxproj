@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		706CD25F1F9831DE0044DB24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD25E1F9831DE0044DB24 /* AppDelegate.m */; };
+		706CD2621F9831DE0044DB24 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD2611F9831DE0044DB24 /* ViewController.m */; };
+		706CD2651F9831DE0044DB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 706CD2631F9831DE0044DB24 /* Main.storyboard */; };
+		706CD2671F9831DE0044DB24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 706CD2661F9831DE0044DB24 /* Assets.xcassets */; };
+		706CD26A1F9831DE0044DB24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 706CD2681F9831DE0044DB24 /* LaunchScreen.storyboard */; };
+		706CD26D1F9831DE0044DB24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD26C1F9831DE0044DB24 /* main.m */; };
+		706CD2781F9833B70044DB24 /* ZTPObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD2741F98339B0044DB24 /* ZTPObject.m */; };
+		706CD27C1F9834A80044DB24 /* ZTMPropertyAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD27B1F9834A80044DB24 /* ZTMPropertyAttribute.m */; };
+		706CD2811F9835890044DB24 /* ZTNetCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD2801F9835890044DB24 /* ZTNetCache.m */; };
+		706CD2871F9849840044DB24 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 706CD2861F9849830044DB24 /* libsqlite3.0.tbd */; };
+		706CD28A1F987A460044DB24 /* ZTHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD2891F987A460044DB24 /* ZTHttpClient.m */; };
+		706CD28D1F98878C0044DB24 /* ZTHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD28C1F98878C0044DB24 /* ZTHttpManager.m */; };
+		706CD2901F98A6C60044DB24 /* ZTResultObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD28F1F98A6C60044DB24 /* ZTResultObject.m */; };
+		706CD29A1F98D0470044DB24 /* ZTHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD2991F98D0470044DB24 /* ZTHttpRequest.m */; };
+		C9A0D3A7720328497A6BB095 /* libPods-ZTNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D89A0D6DBF3D7805B9ABF0F /* libPods-ZTNetworking.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		361430FB30C97ABF98353172 /* Pods-ZTNetworking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZTNetworking.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZTNetworking/Pods-ZTNetworking.release.xcconfig"; sourceTree = "<group>"; };
+		5D89A0D6DBF3D7805B9ABF0F /* libPods-ZTNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZTNetworking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		706CD25A1F9831DE0044DB24 /* ZTNetworking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZTNetworking.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		706CD25D1F9831DE0044DB24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		706CD25E1F9831DE0044DB24 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		706CD2601F9831DE0044DB24 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		706CD2611F9831DE0044DB24 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		706CD2641F9831DE0044DB24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		706CD2661F9831DE0044DB24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		706CD2691F9831DE0044DB24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		706CD26B1F9831DE0044DB24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		706CD26C1F9831DE0044DB24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		706CD2741F98339B0044DB24 /* ZTPObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTPObject.m; sourceTree = "<group>"; };
+		706CD2751F98339B0044DB24 /* ZTPObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTPObject.h; sourceTree = "<group>"; };
+		706CD27A1F9834A80044DB24 /* ZTMPropertyAttribute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTMPropertyAttribute.h; sourceTree = "<group>"; };
+		706CD27B1F9834A80044DB24 /* ZTMPropertyAttribute.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTMPropertyAttribute.m; sourceTree = "<group>"; };
+		706CD27F1F9835890044DB24 /* ZTNetCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTNetCache.h; sourceTree = "<group>"; };
+		706CD2801F9835890044DB24 /* ZTNetCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTNetCache.m; sourceTree = "<group>"; };
+		706CD2861F9849830044DB24 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		706CD2881F987A460044DB24 /* ZTHttpClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTHttpClient.h; sourceTree = "<group>"; };
+		706CD2891F987A460044DB24 /* ZTHttpClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTHttpClient.m; sourceTree = "<group>"; };
+		706CD28B1F98878C0044DB24 /* ZTHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTHttpManager.h; sourceTree = "<group>"; };
+		706CD28C1F98878C0044DB24 /* ZTHttpManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTHttpManager.m; sourceTree = "<group>"; };
+		706CD28E1F98A6C60044DB24 /* ZTResultObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTResultObject.h; sourceTree = "<group>"; };
+		706CD28F1F98A6C60044DB24 /* ZTResultObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTResultObject.m; sourceTree = "<group>"; };
+		706CD2911F98A7A20044DB24 /* ZTHttpConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTHttpConst.h; sourceTree = "<group>"; };
+		706CD2981F98D0470044DB24 /* ZTHttpRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTHttpRequest.h; sourceTree = "<group>"; };
+		706CD2991F98D0470044DB24 /* ZTHttpRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTHttpRequest.m; sourceTree = "<group>"; };
+		70C7A46B1F9ADB2100131C31 /* ZTNetWorking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTNetWorking.h; sourceTree = "<group>"; };
+		B952D065FD076059310B6C1F /* Pods-ZTNetworking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZTNetworking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZTNetworking/Pods-ZTNetworking.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		706CD2571F9831DE0044DB24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				706CD2871F9849840044DB24 /* libsqlite3.0.tbd in Frameworks */,
+				C9A0D3A7720328497A6BB095 /* libPods-ZTNetworking.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3AC82D9976A9FCB614C656AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				706CD2861F9849830044DB24 /* libsqlite3.0.tbd */,
+				5D89A0D6DBF3D7805B9ABF0F /* libPods-ZTNetworking.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		706CD2511F9831DE0044DB24 = {
+			isa = PBXGroup;
+			children = (
+				706CD25C1F9831DE0044DB24 /* ZTNetworking */,
+				706CD25B1F9831DE0044DB24 /* Products */,
+				A374E944222A2C0F6D8C166D /* Pods */,
+				3AC82D9976A9FCB614C656AF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		706CD25B1F9831DE0044DB24 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				706CD25A1F9831DE0044DB24 /* ZTNetworking.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		706CD25C1F9831DE0044DB24 /* ZTNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				70C7A46B1F9ADB2100131C31 /* ZTNetWorking.h */,
+				706CD27E1F9835610044DB24 /* Cache */,
+				706CD27D1F9835530044DB24 /* HTTP */,
+				706CD2731F9833920044DB24 /* Serializer */,
+				706CD25D1F9831DE0044DB24 /* AppDelegate.h */,
+				706CD25E1F9831DE0044DB24 /* AppDelegate.m */,
+				706CD2601F9831DE0044DB24 /* ViewController.h */,
+				706CD2611F9831DE0044DB24 /* ViewController.m */,
+				706CD2631F9831DE0044DB24 /* Main.storyboard */,
+				706CD2661F9831DE0044DB24 /* Assets.xcassets */,
+				706CD2681F9831DE0044DB24 /* LaunchScreen.storyboard */,
+				706CD26B1F9831DE0044DB24 /* Info.plist */,
+				706CD26C1F9831DE0044DB24 /* main.m */,
+			);
+			path = ZTNetworking;
+			sourceTree = "<group>";
+		};
+		706CD2731F9833920044DB24 /* Serializer */ = {
+			isa = PBXGroup;
+			children = (
+				706CD2751F98339B0044DB24 /* ZTPObject.h */,
+				706CD2741F98339B0044DB24 /* ZTPObject.m */,
+				706CD27A1F9834A80044DB24 /* ZTMPropertyAttribute.h */,
+				706CD27B1F9834A80044DB24 /* ZTMPropertyAttribute.m */,
+			);
+			path = Serializer;
+			sourceTree = "<group>";
+		};
+		706CD27D1F9835530044DB24 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				706CD28B1F98878C0044DB24 /* ZTHttpManager.h */,
+				706CD28C1F98878C0044DB24 /* ZTHttpManager.m */,
+				706CD2881F987A460044DB24 /* ZTHttpClient.h */,
+				706CD2891F987A460044DB24 /* ZTHttpClient.m */,
+				706CD28E1F98A6C60044DB24 /* ZTResultObject.h */,
+				706CD28F1F98A6C60044DB24 /* ZTResultObject.m */,
+				706CD2911F98A7A20044DB24 /* ZTHttpConst.h */,
+				706CD2981F98D0470044DB24 /* ZTHttpRequest.h */,
+				706CD2991F98D0470044DB24 /* ZTHttpRequest.m */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		706CD27E1F9835610044DB24 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				706CD27F1F9835890044DB24 /* ZTNetCache.h */,
+				706CD2801F9835890044DB24 /* ZTNetCache.m */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		A374E944222A2C0F6D8C166D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B952D065FD076059310B6C1F /* Pods-ZTNetworking.debug.xcconfig */,
+				361430FB30C97ABF98353172 /* Pods-ZTNetworking.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		706CD2591F9831DE0044DB24 /* ZTNetworking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 706CD2701F9831DE0044DB24 /* Build configuration list for PBXNativeTarget "ZTNetworking" */;
+			buildPhases = (
+				B3F8EB2716F477CE48BDE8E5 /* [CP] Check Pods Manifest.lock */,
+				706CD2561F9831DE0044DB24 /* Sources */,
+				706CD2571F9831DE0044DB24 /* Frameworks */,
+				706CD2581F9831DE0044DB24 /* Resources */,
+				7EC835C057830F6F04C3D374 /* [CP] Embed Pods Frameworks */,
+				FF7AE3F3E87F8168A9E7BD6D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZTNetworking;
+			productName = ZTNetworking;
+			productReference = 706CD25A1F9831DE0044DB24 /* ZTNetworking.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		706CD2521F9831DE0044DB24 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = huanglu;
+				TargetAttributes = {
+					706CD2591F9831DE0044DB24 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 706CD2551F9831DE0044DB24 /* Build configuration list for PBXProject "ZTNetworking" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 706CD2511F9831DE0044DB24;
+			productRefGroup = 706CD25B1F9831DE0044DB24 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				706CD2591F9831DE0044DB24 /* ZTNetworking */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		706CD2581F9831DE0044DB24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				706CD26A1F9831DE0044DB24 /* LaunchScreen.storyboard in Resources */,
+				706CD2671F9831DE0044DB24 /* Assets.xcassets in Resources */,
+				706CD2651F9831DE0044DB24 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7EC835C057830F6F04C3D374 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZTNetworking/Pods-ZTNetworking-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3F8EB2716F477CE48BDE8E5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FF7AE3F3E87F8168A9E7BD6D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZTNetworking/Pods-ZTNetworking-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		706CD2561F9831DE0044DB24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				706CD2621F9831DE0044DB24 /* ViewController.m in Sources */,
+				706CD26D1F9831DE0044DB24 /* main.m in Sources */,
+				706CD28D1F98878C0044DB24 /* ZTHttpManager.m in Sources */,
+				706CD2901F98A6C60044DB24 /* ZTResultObject.m in Sources */,
+				706CD27C1F9834A80044DB24 /* ZTMPropertyAttribute.m in Sources */,
+				706CD2781F9833B70044DB24 /* ZTPObject.m in Sources */,
+				706CD29A1F98D0470044DB24 /* ZTHttpRequest.m in Sources */,
+				706CD2811F9835890044DB24 /* ZTNetCache.m in Sources */,
+				706CD28A1F987A460044DB24 /* ZTHttpClient.m in Sources */,
+				706CD25F1F9831DE0044DB24 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		706CD2631F9831DE0044DB24 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				706CD2641F9831DE0044DB24 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		706CD2681F9831DE0044DB24 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				706CD2691F9831DE0044DB24 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		706CD26E1F9831DE0044DB24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		706CD26F1F9831DE0044DB24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		706CD2711F9831DE0044DB24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B952D065FD076059310B6C1F /* Pods-ZTNetworking.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2F85MS5QM7;
+				INFOPLIST_FILE = ZTNetworking/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.biz-uinitedT.SFA.ZTNetworking";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		706CD2721F9831DE0044DB24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 361430FB30C97ABF98353172 /* Pods-ZTNetworking.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2F85MS5QM7;
+				INFOPLIST_FILE = ZTNetworking/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.biz-uinitedT.SFA.ZTNetworking";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		706CD2551F9831DE0044DB24 /* Build configuration list for PBXProject "ZTNetworking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				706CD26E1F9831DE0044DB24 /* Debug */,
+				706CD26F1F9831DE0044DB24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		706CD2701F9831DE0044DB24 /* Build configuration list for PBXNativeTarget "ZTNetworking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				706CD2711F9831DE0044DB24 /* Debug */,
+				706CD2721F9831DE0044DB24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 706CD2521F9831DE0044DB24 /* Project object */;
+}
