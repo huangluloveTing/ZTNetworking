@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ZTNetworking"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "一个基于AF 的网络框架"
 
   s.homepage     = "https://github.com/huangluloveTing/ZTNetworking.git"
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
  
   s.requires_arc = true
  
-  s.source_files = 'ZTNetworking/**/*.h' 
+  s.source_files = 'ZTNetworking/*.h' 
 
     # CACHE
    s.subspec 'Cache' do |cache|
