@@ -17,7 +17,7 @@ static NSString * _Nullable const  RequestType_Normal = @"UPLOAD_NORMAL";
 
 @property (nonatomic , strong , nullable , readwrite) NSDictionary *parameters; //
 
-@property (nonatomic , strong , nullable , readwrite) NSString *uri; //
+@property (nonatomic , strong , nullable , readwrite) NSString *url; //
 
 @property (nonatomic , strong , nullable , readwrite) NSString *identifier; //
 

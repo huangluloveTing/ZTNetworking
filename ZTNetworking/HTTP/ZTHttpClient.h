@@ -30,8 +30,9 @@ typedef void(^UploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedUni
  @param uploadHost 上传接口的请求ip
  @return return value description
  */
--(nonnull instancetype) initWithNormalHost:(nonnull NSString *)normalHost
-                                UploadHost:(nonnull NSString *)uploadHost;
+//-(nonnull instancetype) initWithNormalHost:(nonnull NSString *)normalHost
+//                                UploadHost:(nullable NSString *)uploadHost
+//                                IcloudHost:(nullable NSString *)icloudHost;
 
 
 /**
@@ -49,24 +50,15 @@ typedef void(^UploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedUni
 - (void) setRequestTimeOut:(CGFloat)timeOut;
 
 
-/**
- 普通接口
-
- @param uri 唯一自愿标识符
- @param parameters 参数
- @param headers header
- @param completion block
- @return task
- */
-- (nullable NSURLSessionDataTask *) perfrom_normal_post_URI:(nonnull NSString *)uri
-                                                 Parameters:(nullable NSDictionary *)parameters
+- (nullable NSURLSessionDataTask *) perfrom_normal_post_URL:(nonnull NSString *)url
+                                                 Parameters:(nonnull NSDictionary *)parameters
                                                     Headers:(nullable NSDictionary *)headers
-                                                 Completion:(nullable NormalRequestCompletion)completion;
+                                                 Completion:(nullable NormalRequestCompletion) completion;
 
 /**
  上传接口
 
- @param uri 唯一资源标志符
+ @param url 唯一资源标志符
  @param parameters 参数
  @param binary 文件数据
  @param name  名称
@@ -75,7 +67,7 @@ typedef void(^UploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedUni
  @param completion block
  @return task
  */
-- (nullable NSURLSessionDataTask *) perform_upload_URI:(nonnull NSString *)uri
+- (nullable NSURLSessionDataTask *) perform_upload_URL:(nonnull NSString *)url
                                             Parameters:(nullable NSDictionary *)parameters
                                                 Binary:(nullable NSData *)binary
                                                   Name:(nonnull NSString *)name
@@ -83,6 +75,29 @@ typedef void(^UploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedUni
                                                Headers:(nullable NSDictionary *)headers
                                               Progress:(nullable UploadProgressBlock)progress
                                             Completion:(nullable UploadRequestCompletion)completion;
+
+
+///**
+// 三方云服务的接口
+//
+// @param uri uri
+// @param parameters 参数
+// @param binary 数据
+// @param name name
+// @param fileName fileName
+// @param headers header
+// @param progress 进度
+// @param completion block
+// @return return value description
+// */
+//- (nullable NSURLSessionDataTask *) perform_Icloud_URI:(nullable NSString *)uri
+//                                            Parameters:(nullable NSDictionary *)parameters
+//                                                Binary:(nonnull NSData *)binary
+//                                                  Name:(nonnull NSString *)name
+//                                              FileName:(nonnull NSString *)fileName
+//                                               Headers:(nullable NSDictionary *)headers
+//                                              Progress:(nullable UploadProgressBlock)progress
+//                                            Completion:(nullable UploadRequestCompletion)completion;
 
 
 @end

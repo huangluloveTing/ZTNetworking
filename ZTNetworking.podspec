@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ZTNetworking"
-  s.version      = "1.0.3"
+  s.version      = "1.1.0"
   s.summary      = "一个基于AF 的网络框架"
 
   s.homepage     = "https://github.com/huangluloveTing/ZTNetworking.git"
@@ -30,6 +30,7 @@ Pod::Spec.new do |s|
     ht.source_files = 'ZTNetworking/HTTP/**/*.{h,m}'
     ht.dependency 'ZTNetworking/Serializer'
     ht.dependency 'ZTNetworking/Cache'
+    ht.dependency 'ZTNetworking/util'
     ht.dependency 'AFNetworking'
 
    end
@@ -38,6 +39,13 @@ Pod::Spec.new do |s|
    s.subspec 'Serializer' do |se|
 
     se.source_files = 'ZTNetworking/Serializer/**/*.{h,m}'
+
+   end
+
+   # Util
+   s.subspec 'Util' do |util|
+
+    util.source_files = 'ZTNetworking/util/**/*.{h,m}'
 
    end
 

@@ -9,8 +9,7 @@
 #import "ZTHttpManager.h"
 #import "ZTHttpClient.h"
 #import "ZTResultObject.h"
-#import "ZTHttpRequest.h"
-
+#import "QCloudUtil.h"
 
 #define Save_File_Dir ([NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject])
 
@@ -34,6 +33,18 @@
 
 @property (nonatomic , strong) dispatch_semaphore_t upload_sema_t; // rest 请求的信号量
 
+@property (nonatomic , copy) NSString *qinyun_access_key_id;
+@property (nonatomic , copy) NSString *qinyun_secret_key;
+
+
+//普通Post 接口 的 ip 地址
+@property (nonatomic , copy) NSString *normalHost;
+
+//上传接口的 ip
+@property (nonatomic , copy) NSString *uploadHost;
+
+@property (nonatomic , copy) NSString *icloudHost;  //三方云服务的ip地址
+
 @end
 
 @implementation ZTHttpManager {
@@ -49,7 +60,7 @@ static ZTHttpManager *manager = nil;
         if (! manager) {
             
             manager = [[ZTHttpManager alloc] init];
-            
+            manager.httpClient = [[ZTHttpClient alloc] init];
             [manager.httpClient setRequestTimeOut:40];
             manager.netCache = [[ZTNetCache alloc] init];
             manager.netCache = [[ZTNetCache alloc] init];
@@ -69,9 +80,12 @@ static ZTHttpManager *manager = nil;
 }
 
 - (void) setNormalHost:(NSString *)normalHost
-            UploadHost:(NSString *)uploadHost {
-    self.httpClient = [[ZTHttpClient alloc] initWithNormalHost:normalHost
-                                                    UploadHost:uploadHost];
+            UploadHost:(NSString *)uploadHost
+       ICloudBuketHost:(nullable NSString *)icloudHost{
+    
+    self.normalHost = normalHost;
+    self.uploadHost = uploadHost;
+    self.icloudHost = icloudHost;
 }
 
 - (void) setRequestTimeout:(CGFloat)timeOut {
@@ -83,13 +97,18 @@ static ZTHttpManager *manager = nil;
 }
 
 
-- (BOOL) uploadRequestSuccessForRetObject:(id)retObject {
+- (BOOL) uploadRequestSuccessForRetObject:(id)retObject Request:(ZTHttpRequest *) request {
     
     return NO;
 }
 
-- (BOOL) restRequestSuccessForRetObject:(id)retObject {
+- (BOOL) restRequestSuccessForRetObject:(id)retObject Request:(ZTHttpRequest *)request {
     return NO;
+}
+
+- (void) setQinyun_Access_key_id:(NSString *)qinAccessKeyId SecretKey:(nonnull NSString *)secretKey {
+    self.qinyun_access_key_id = qinAccessKeyId;
+    self.qinyun_secret_key = secretKey;
 }
 
 - (NSArray *) getCurrentRestQueue {
@@ -117,8 +136,16 @@ static ZTHttpManager *manager = nil;
                                            Headers:(nullable NSDictionary *)headers
                                         Completion:(ZTNormalRequestCompletion)completion {
     
+    NSString *url = [NSString stringWithFormat:@"%@%@" , self.normalHost , uri];
     
-    return [_httpClient perfrom_normal_post_URI:uri
+    return [self perform_postRequest_URL:url Parameters:parameters Headers:headers Completion:completion];
+}
+
+- (NSURLSessionDataTask *) perform_postRequest_URL:(NSString *)url
+                                        Parameters:(NSDictionary *)parameters
+                                           Headers:(nullable NSDictionary *)headers
+                                        Completion:(ZTNormalRequestCompletion)completion {
+    return [_httpClient perfrom_normal_post_URL:url
                                      Parameters:parameters
                                         Headers:headers
                                      Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
@@ -131,7 +158,7 @@ static ZTHttpManager *manager = nil;
          if (completion) {
              completion(retObject , error);
          }
-    }];
+     }];
 }
 
 - (NSURLSessionDataTask *) perform_UploadRequest_URI:(NSString *)uri
@@ -142,8 +169,26 @@ static ZTHttpManager *manager = nil;
                                               Binary:(nonnull NSData *)binary
                                             Progress:(nullable ZTUploadProgressBlock)progress
                                           Completion:(ZTUploadRequestCompletion)completion {
-    
-    return [_httpClient perform_upload_URI:uri
+    NSString *url = [NSString stringWithFormat:@"%@%@" , self.uploadHost , uri];
+    return [self perform_uploadRequest_URL:url
+                                Parameters:parameters
+                                   Headers:headers
+                                      Name:name
+                                  FileName:fileName
+                                    Binary:binary
+                                  Progress:progress
+                                Completion:completion];
+}
+
+- (NSURLSessionDataTask *) perform_uploadRequest_URL:(NSString *)url
+                                          Parameters:(NSDictionary *)parameters
+                                             Headers:(NSDictionary *)headers
+                                                Name:(nonnull NSString *) name
+                                            FileName:(nonnull NSString *)fileName
+                                              Binary:(nonnull NSData *)binary
+                                            Progress:(nullable ZTUploadProgressBlock)progress
+                                          Completion:(ZTUploadRequestCompletion)completion {
+    return [_httpClient perform_upload_URL:url
                                 Parameters:parameters
                                     Binary:binary
                                       Name:name
@@ -160,7 +205,7 @@ static ZTHttpManager *manager = nil;
             if (completion) {
                 completion(retObject , error);
             }
-    }];
+        }];
 }
 
 - (NSURLSessionDataTask *) perform_BackUploadRequest_URI:(NSString *)uri
@@ -174,12 +219,13 @@ static ZTHttpManager *manager = nil;
                                                 Progress:(nullable ZTUploadProgressBlock)progress
                                               Completion:(ZTUploadRequestCompletion)completion {
     
+    NSString *url = [NSString stringWithFormat:@"%@%@" , self.uploadHost , uri];
     ZTHttpRequest *ztRequest = [[ZTHttpRequest alloc] init];
     ztRequest.parameters = parameters;
     ztRequest.identifier = [NSString stringWithFormat:@"%.f",[NSDate date].timeIntervalSince1970 * 1000];
     ztRequest.fileName = fileName;
     ztRequest.name = name;
-    ztRequest.uri = uri;
+    ztRequest.url = url;
     ztRequest.requestType = RequestType_UploadFile;
     ztRequest.taskName = taskName;
     ztRequest.aynac = [NSString stringWithFormat:@"%d" , asynac];
@@ -208,10 +254,11 @@ static ZTHttpManager *manager = nil;
                                                   Asynac:(BOOL)asynac
                                               Completion:(ZTNormalRequestCompletion)completion {
     
+    NSString *url = [NSString stringWithFormat:@"%@%@" , self.normalHost , uri];
     ZTHttpRequest *ztRequest = [[ZTHttpRequest alloc] init];
     ztRequest.parameters = parameters;
     ztRequest.identifier = [NSString stringWithFormat:@"%.f",[NSDate date].timeIntervalSince1970 * 1000];
-    ztRequest.uri = uri;
+    ztRequest.url = url;
     ztRequest.aynac = [NSString stringWithFormat:@"%d" , asynac];
     ztRequest.requestType = RequestType_Normal;
     ztRequest.taskName = taskName;
@@ -228,6 +275,58 @@ static ZTHttpManager *manager = nil;
     
     return task;
 }
+
+#pragma mark - 青云
+- (NSURLSessionDataTask *) perform_Upload_Qinyun_FilePath:(NSString *)qFilePath
+                                                 TaskName:(nullable NSString *)taskName
+                                                   Binary:(NSData *)fileData
+                                                   IsBack:(BOOL)isBack
+                                                 Progress:(ZTUploadProgressBlock)progress
+                                               Completion:(ZTUploadRequestCompletion)completion {
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@" , self.icloudHost];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:self.qinyun_access_key_id   forKey:@"access_key_id"];
+    [parameters setValue:qFilePath     forKey:@"key"];
+    
+    NSString *policy = [QCloudUtil makePolicyWithParameters:parameters];
+    
+    [parameters setValue:policy forKey:@"policy"];
+    NSString *signature = [QCloudUtil makeSignatureWithSecretKey:self.qinyun_secret_key Policy:policy];
+    [parameters setValue:signature forKey:@"signature"];
+    
+    ZTHttpRequest *ztRequest = [[ZTHttpRequest alloc] init];
+    ztRequest.parameters = parameters;
+    ztRequest.identifier = [NSString stringWithFormat:@"%.f",[NSDate date].timeIntervalSince1970 * 1000];
+    ztRequest.fileName = qFilePath;
+    ztRequest.name = qFilePath;
+    ztRequest.url = url;
+    ztRequest.requestType = RequestType_UploadFile;
+    ztRequest.taskName = taskName;
+    
+    if (isBack) {
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@.tmp" , Save_File_Dir , ztRequest.identifier];
+        [fileData writeToFile:filePath atomically:YES];
+        [self.netCache saveData:ztRequest];
+        NSURLSessionDataTask *task = [self perform_backUploadRequest:ztRequest Back:YES Completion:completion];
+        [self enquenUploadQueun:task Request:ztRequest];
+        
+        return task;
+    }
+    
+    return [self perform_uploadRequest_URL:url
+                                Parameters:parameters
+                                   Headers:nil
+                                      Name:qFilePath
+                                  FileName:qFilePath
+                                    Binary:fileData
+                                  Progress:progress
+                                Completion:completion];
+}
+
+#pragma mark --------
 
 - (void) dequeUploadQueun:(ZTHttpRequest *) ztRequest {
     @synchronized(_backUploadQueue) {
@@ -251,7 +350,7 @@ static ZTHttpManager *manager = nil;
                                                 Back:(BOOL)isBack
                                           Completion:(ZTNormalRequestCompletion)completion {
     NSDictionary *paramters = ztRequest.parameters;
-    NSString *uri = ztRequest.uri;
+    NSString *uri = [ztRequest.url substringFromIndex:self.normalHost.length];
     
     NSURLSessionDataTask *task = [self perform_PostRequest_URI:uri
                                                     Parameters:paramters
@@ -261,7 +360,7 @@ static ZTHttpManager *manager = nil;
         if (completion) {
             completion(retObject , error);
         }
-        if (isBack && (![self uploadRequestSuccessForRetObject:retObject] || error)) {
+        if (isBack && (![self uploadRequestSuccessForRetObject:retObject Request:ztRequest] || error)) {
             [self restartPostFailedQueuen:ztRequest];
             return ;
         }
@@ -275,7 +374,7 @@ static ZTHttpManager *manager = nil;
                                                 Back:(BOOL)isBack
                                           Completion:(ZTUploadRequestCompletion)completion {
     
-    NSString *uri = ztRequest.uri;
+    NSString *url = ztRequest.url;
     NSDictionary *parameters = ztRequest.parameters;
     NSString *name = ztRequest.name;
     NSString *fileName = ztRequest.fileName;
@@ -284,7 +383,7 @@ static ZTHttpManager *manager = nil;
     if (binary.length == 0) {
         return nil;
     }
-    NSURLSessionDataTask *task = [self perform_UploadRequest_URI:uri
+    NSURLSessionDataTask *task = [self perform_uploadRequest_URL:url
                                                       Parameters:parameters
                                                          Headers:nil
                                                             Name:name
@@ -296,7 +395,7 @@ static ZTHttpManager *manager = nil;
           if (completion) {
               completion(retObject , error);
           }
-          if (isBack && (![self uploadRequestSuccessForRetObject:retObject] || error)) {
+          if (isBack && (![self uploadRequestSuccessForRetObject:retObject Request:nil] || error)) {
               [self restartUploadFailedQueuen:ztRequest];
               return ;
           }
@@ -390,7 +489,7 @@ static ZTHttpManager *manager = nil;
     __block NSURLSessionDataTask *task = nil;
     dispatch_async(_rest_queue, ^{
         dispatch_semaphore_wait(_rest_sema_t, DISPATCH_TIME_FOREVER);
-        task = [self perform_PostRequest_URI:request.uri
+        task = [self perform_postRequest_URL:request.url
                                   Parameters:request.parameters
                                      Headers:nil
                                   Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
@@ -405,7 +504,7 @@ static ZTHttpManager *manager = nil;
                  }
              }
              
-             if (error || ! [self restRequestSuccessForRetObject:retObject]) {
+             if (error || ! [self restRequestSuccessForRetObject:retObject Request:request]) {
                  task = [self putQueunRestStackBottomRequest:request];
                  dispatch_semaphore_signal(_rest_sema_t);
              } else {
@@ -473,7 +572,7 @@ static ZTHttpManager *manager = nil;
                  }
              }
            
-             if (error || [self uploadRequestSuccessForRetObject:retObject]) {
+             if (error || [self uploadRequestSuccessForRetObject:retObject Request:request]) {
                  dispatch_semaphore_signal(_upload_sema_t);
                  task = [self putQueunUploadStackBottomRequest:request];
                  
@@ -494,7 +593,7 @@ static ZTHttpManager *manager = nil;
         NSLog(@"");
         
         if ([re.requestType isEqualToString:RequestType_Normal]) {
-            [self perform_BackNormalRequest_URI:re.uri
+            [self perform_BackNormalRequest_URI:re.url
                                        TaskName:re.taskName
                                      Parameters:re.parameters
                                         Headers:nil

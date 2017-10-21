@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ZTNetCache.h"
 #import "ZTHttpConst.h"
+#import "ZTHttpRequest.h"
 
 #define REQUEST_SEP_TIME (3)
 
@@ -22,17 +23,19 @@ typedef void(^ZTUploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedP
 
 typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nullable error , id _Nullable requestObject);
 
+/**
+ 建议集成该类，然后写业务方面的接口 ， 对于 离线的 状态判断，需要自己重写 成功 判断
+ */
 @interface ZTHttpManager : NSObject
 
 
-@property (nonatomic , copy , nullable) ZTNormalRequestCompletion restCompletion;
+@property (nonatomic , copy , nullable) ZTNormalRequestCompletion restCompletion; 
 
 @property (nonatomic , copy , nullable) ZTGloableRequestHandler gloableHandler;
 
 @property (nonatomic , copy , nullable) ZTUploadRequestCompletion uploadCompletion;
 
 @property (nonatomic , copy , nullable) ZTUploadProgressBlock progressBlock;
-
 
 + (nonnull instancetype) sharedManager;
 
@@ -42,10 +45,21 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
 
  @param normalHost 普通接口的ip
  @param uploadHost 上传的ip
+ @param icloudHost 云服务的ip地址
  */
 - (void) setNormalHost:(nonnull NSString *)normalHost
-            UploadHost:(nonnull NSString *)uploadHost;
+            UploadHost:(nonnull NSString *)uploadHost
+       ICloudBuketHost:(nullable NSString *)icloudHost;
 
+
+/**
+ 青云云存储的配置
+
+ @param qinAccessKeyId access key id
+ @param secretKey secret key
+ */
+- (void) setQinyun_Access_key_id:(nonnull NSString *)qinAccessKeyId
+                       SecretKey:(nonnull NSString *)secretKey;
 
 /**
  设置超时时间
@@ -119,7 +133,6 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
 
 /**
  支持后台数据 post 的接口
- 使用该方法， 参数实体必须遵守 PZTObject 协议
  
  @param uri uri
  @param parameters 参数实体
@@ -138,7 +151,6 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
 
 /**
  支持后台文件上传接口
- 用该方法， 文件参数 必须是 遵守 PZTObject 协议的对象实体
 
  @param uri uri
  @param parameters 参数
@@ -162,21 +174,44 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
                                                          Progress:(nullable ZTUploadProgressBlock)progress
                                                        Completion:(nullable ZTUploadRequestCompletion)completion;
 
+#pragma mark -- 青云
+
+/**
+ 青云云存储
+
+ @param qFilePath 对应的 参数列表的key ------ 青云 文件的地址
+ @param taskName 任务名称。----- 该属性 方便查看离线队列的 来源
+ @param fileData 数据
+ @param isBack 是否离线
+ @param progress 进度
+ @param completion block
+ @return return
+ */
+- (nullable NSURLSessionDataTask *) perform_Upload_Qinyun_FilePath:(nonnull NSString *)qFilePath
+                                                          TaskName:(nullable NSString *)taskName
+                                                            Binary:(nonnull NSData *)fileData
+                                                            IsBack:(BOOL)isBack
+                                                          Progress:(nullable ZTUploadProgressBlock)progress
+                                                        Completion:(nullable ZTUploadRequestCompletion)completion;
+
+
 #pragma mark - 需重写的方法
 /**
  针对文件上传离线 时 ， 判断返回数据 是否 是成功的判断
-
+ 
  @param retObject 服务端返回的数据
  @return return
  */
-- (BOOL) uploadRequestSuccessForRetObject:(nullable id)retObject;
+- (BOOL) uploadRequestSuccessForRetObject:(nullable id)retObject Request:(nullable ZTHttpRequest *) request;
 
 /**
  针对普通数据 离线 时 ， 判断返回数据 是否 是成功的判断
  @param retObject 服务端返回数据
  @return return value descriptio
  */
-- (BOOL) restRequestSuccessForRetObject:(nullable id)retObject;
+- (BOOL) restRequestSuccessForRetObject:(nullable id)retObject Request:(nullable ZTHttpRequest *)request;
+
+
 
 
 @end

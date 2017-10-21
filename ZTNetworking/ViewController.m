@@ -10,6 +10,22 @@
 #import "ZTNetWorking.h"
 
 
+#ifdef DEBUG
+static NSString *const QCloundIP = @"https://pek3a.qingstor.com/";
+static NSString *const QCloud_Access_key_Id = @"VLYGXZQWCZUJJLKGFSKK";
+static NSString *const QCloud_Secret_Access_key = @"9shVhM8DQgVqgnZxFrKUQ2IYBC0mwUDMsiPpKkOn";
+static NSString *const QCloud_Bucket_Name = @"yanghe-sfa-20170707";
+
+#else
+
+static NSString *const QCloundIP = @"http://yanghe1.stor.chinayanghe.com/";
+static NSString *const QCloud_Access_key_Id = @"XIIYXDLTWWYWNDGGGQSY";
+static NSString *const QCloud_Secret_Access_key = @"KiR0383h1SZuwtpFUh1iEd96JRgsNlaPpZHOraVK";
+static NSString *const QCloud_Bucket_Name = @"yanghesfa";
+
+#endif
+
+
 @interface ViewController ()
 
 @property (nonatomic , strong) NSURLSessionDataTask *dataTask;
@@ -76,18 +92,35 @@
     if (!data) {
         data = UIImageJPEGRepresentation(image, 1);
     }
-    self.dataTask = [[ZTHttpManager sharedManager] perform_BackUploadRequest_URI:@""
-                                                                        TaskName:@"upload"
-                                                                      Parameters:parameters
-                                                                         Headers:nil
-                                                                            Name:@"name"
-                                                                        FileName:@"fileName"
-                                                                          Binary:data
-                                                                          Asynac:YES
-                                                                        Progress:nil
-                                                                      Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
-
-    }];
+    
+    [[ZTHttpManager sharedManager] setNormalHost:@"" UploadHost:@"" ICloudBuketHost:[NSString stringWithFormat:@"%@%@", QCloundIP,QCloud_Bucket_Name]];
+    [[ZTHttpManager sharedManager] setQinyun_Access_key_id:QCloud_Access_key_Id SecretKey:QCloud_Secret_Access_key];
+    
+//    self.dataTask = [[ZTHttpManager sharedManager] perform_BackUploadRequest_URI:@""
+//                                                                        TaskName:@"upload"
+//                                                                      Parameters:parameters
+//                                                                         Headers:nil
+//                                                                            Name:@"name"
+//                                                                        FileName:@"fileName"
+//                                                                          Binary:data
+//                                                                          Asynac:YES
+//                                                                        Progress:nil
+//                                                                      Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
+//
+//    }];
+    NSString *path = @"拜访CHECK/30020937/20171021/啦啦啦啦啦/门头采集/改善前jjjj1508564444582.jpg";
+    self.dataTask2 = [[ZTHttpManager sharedManager] perform_Upload_Qinyun_FilePath:path
+                                                                          TaskName:@"picture"
+                                                                            Binary:data
+                                                                            IsBack:NO
+                                                                          Progress:^(CGFloat totalUnitCount, CGFloat completedProgress) {
+        
+    
+                                                                          }
+                                                                        Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
+        
+    
+                                                                        }];
 }
 
 
