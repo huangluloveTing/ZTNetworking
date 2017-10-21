@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
     ht.source_files = 'ZTNetworking/HTTP/**/*.{h,m}'
     ht.dependency 'ZTNetworking/Serializer'
     ht.dependency 'ZTNetworking/Cache'
-    ht.dependency 'ZTNetworking/util'
+    ht.dependency 'ZTNetworking/Util'
     ht.dependency 'AFNetworking'
 
    end
@@ -45,7 +45,7 @@ Pod::Spec.new do |s|
    # Util
    s.subspec 'Util' do |util|
 
-    util.source_files = 'ZTNetworking/util/**/*.{h,m}'
+    util.source_files = 'ZTNetworking/Util/**/*.{h,m}'
 
    end
 
