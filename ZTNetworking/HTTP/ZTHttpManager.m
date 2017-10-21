@@ -49,8 +49,7 @@ static ZTHttpManager *manager = nil;
         if (! manager) {
             
             manager = [[ZTHttpManager alloc] init];
-            manager.httpClient = [[ZTHttpClient alloc] initWithNormalHost:ZT_REST_TASK_IP
-                                                               UploadHost:ZT_UPLoad_TASK_IP];
+            
             [manager.httpClient setRequestTimeOut:40];
             manager.netCache = [[ZTNetCache alloc] init];
             manager.netCache = [[ZTNetCache alloc] init];
@@ -69,6 +68,11 @@ static ZTHttpManager *manager = nil;
     return manager;
 }
 
+- (void) setNormalHost:(NSString *)normalHost
+            UploadHost:(NSString *)uploadHost {
+    self.httpClient = [[ZTHttpClient alloc] initWithNormalHost:normalHost
+                                                    UploadHost:uploadHost];
+}
 
 - (void) setRequestTimeout:(CGFloat)timeOut {
     [_httpClient setRequestTimeOut:timeOut];

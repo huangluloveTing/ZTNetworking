@@ -10,10 +10,6 @@
 #import "ZTNetCache.h"
 #import "ZTHttpConst.h"
 
-static NSString * _Nullable const ZT_REST_TASK_IP = @"http://192.168.31.101:8080/eisp/";
-
-static NSString * _Nullable const ZT_UPLoad_TASK_IP = @"http://192.168.31.101:8080/eisp/uploadServletForIos";
-
 #define REQUEST_SEP_TIME (3)
 
 
@@ -39,6 +35,16 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
 
 
 + (nonnull instancetype) sharedManager;
+
+
+/**
+ 设置请求的Ip地址
+
+ @param normalHost 普通接口的ip
+ @param uploadHost 上传的ip
+ */
+- (void) setNormalHost:(nonnull NSString *)normalHost
+            UploadHost:(nonnull NSString *)uploadHost;
 
 
 /**
