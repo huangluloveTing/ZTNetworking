@@ -5,7 +5,6 @@
 #include <string.h>
 #include <inttypes.h>
 
-
 #define DES_ENCRYPT     1
 #define DES_DECRYPT     0
 

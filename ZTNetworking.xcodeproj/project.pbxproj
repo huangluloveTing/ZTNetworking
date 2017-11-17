@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		702AE9A21F9B353D007F9633 /* bignum.c in Sources */ = {isa = PBXBuildFile; fileRef = 702AE99D1F9B353C007F9633 /* bignum.c */; };
+		702AE9A31F9B353D007F9633 /* des.c in Sources */ = {isa = PBXBuildFile; fileRef = 702AE9A11F9B353D007F9633 /* des.c */; };
 		706CD25F1F9831DE0044DB24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD25E1F9831DE0044DB24 /* AppDelegate.m */; };
 		706CD2621F9831DE0044DB24 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD2611F9831DE0044DB24 /* ViewController.m */; };
 		706CD2651F9831DE0044DB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 706CD2631F9831DE0044DB24 /* Main.storyboard */; };
@@ -24,9 +26,7 @@
 		70C7A4731F9B094800131C31 /* QCloudUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A4701F9B093400131C31 /* QCloudUtil.m */; };
 		70C7A4761F9B0BD200131C31 /* DPOSSUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A4741F9B0BD200131C31 /* DPOSSUtility.m */; };
 		70C7A4791F9B0BDA00131C31 /* DPQiniuUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A4781F9B0BDA00131C31 /* DPQiniuUtility.m */; };
-		70C7A4811F9B0BE400131C31 /* DPCryptoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A47C1F9B0BE200131C31 /* DPCryptoUtility.m */; };
-		70C7A4821F9B0BE400131C31 /* des.c in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A47E1F9B0BE300131C31 /* des.c */; };
-		70C7A4831F9B0BE400131C31 /* bignum.c in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A47F1F9B0BE300131C31 /* bignum.c */; };
+		70C7A4811F9B0BE400131C31 /* ZTCryptoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A47C1F9B0BE200131C31 /* ZTCryptoUtility.m */; };
 		70C7A4861F9B0BF700131C31 /* DPKeyChainUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A4851F9B0BF600131C31 /* DPKeyChainUtility.m */; };
 		C9A0D3A7720328497A6BB095 /* libPods-ZTNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D89A0D6DBF3D7805B9ABF0F /* libPods-ZTNetworking.a */; };
 /* End PBXBuildFile section */
@@ -34,6 +34,11 @@
 /* Begin PBXFileReference section */
 		361430FB30C97ABF98353172 /* Pods-ZTNetworking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZTNetworking.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZTNetworking/Pods-ZTNetworking.release.xcconfig"; sourceTree = "<group>"; };
 		5D89A0D6DBF3D7805B9ABF0F /* libPods-ZTNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZTNetworking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		702AE99D1F9B353C007F9633 /* bignum.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bignum.c; sourceTree = "<group>"; };
+		702AE99E1F9B353D007F9633 /* bn_mul.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bn_mul.h; sourceTree = "<group>"; };
+		702AE99F1F9B353D007F9633 /* des.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = des.h; sourceTree = "<group>"; };
+		702AE9A01F9B353D007F9633 /* bignum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bignum.h; sourceTree = "<group>"; };
+		702AE9A11F9B353D007F9633 /* des.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = des.c; sourceTree = "<group>"; };
 		706CD25A1F9831DE0044DB24 /* ZTNetworking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZTNetworking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		706CD25D1F9831DE0044DB24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		706CD25E1F9831DE0044DB24 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -67,13 +72,8 @@
 		70C7A4751F9B0BD200131C31 /* DPOSSUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPOSSUtility.h; sourceTree = "<group>"; };
 		70C7A4771F9B0BDA00131C31 /* DPQiniuUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPQiniuUtility.h; sourceTree = "<group>"; };
 		70C7A4781F9B0BDA00131C31 /* DPQiniuUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPQiniuUtility.m; sourceTree = "<group>"; };
-		70C7A47A1F9B0BE200131C31 /* bignum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bignum.h; sourceTree = "<group>"; };
-		70C7A47B1F9B0BE200131C31 /* bn_mul.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bn_mul.h; sourceTree = "<group>"; };
-		70C7A47C1F9B0BE200131C31 /* DPCryptoUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPCryptoUtility.m; sourceTree = "<group>"; };
-		70C7A47D1F9B0BE300131C31 /* des.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = des.h; sourceTree = "<group>"; };
-		70C7A47E1F9B0BE300131C31 /* des.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = des.c; sourceTree = "<group>"; };
-		70C7A47F1F9B0BE300131C31 /* bignum.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bignum.c; sourceTree = "<group>"; };
-		70C7A4801F9B0BE400131C31 /* DPCryptoUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPCryptoUtility.h; sourceTree = "<group>"; };
+		70C7A47C1F9B0BE200131C31 /* ZTCryptoUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTCryptoUtility.m; sourceTree = "<group>"; };
+		70C7A4801F9B0BE400131C31 /* ZTCryptoUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTCryptoUtility.h; sourceTree = "<group>"; };
 		70C7A4841F9B0BF600131C31 /* DPKeyChainUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPKeyChainUtility.h; sourceTree = "<group>"; };
 		70C7A4851F9B0BF600131C31 /* DPKeyChainUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPKeyChainUtility.m; sourceTree = "<group>"; };
 		B952D065FD076059310B6C1F /* Pods-ZTNetworking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZTNetworking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZTNetworking/Pods-ZTNetworking.debug.xcconfig"; sourceTree = "<group>"; };
@@ -179,15 +179,15 @@
 		70C7A46F1F9B092900131C31 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				702AE99D1F9B353C007F9633 /* bignum.c */,
+				702AE9A01F9B353D007F9633 /* bignum.h */,
+				702AE99E1F9B353D007F9633 /* bn_mul.h */,
+				702AE9A11F9B353D007F9633 /* des.c */,
+				702AE99F1F9B353D007F9633 /* des.h */,
 				70C7A4841F9B0BF600131C31 /* DPKeyChainUtility.h */,
 				70C7A4851F9B0BF600131C31 /* DPKeyChainUtility.m */,
-				70C7A47F1F9B0BE300131C31 /* bignum.c */,
-				70C7A47A1F9B0BE200131C31 /* bignum.h */,
-				70C7A47B1F9B0BE200131C31 /* bn_mul.h */,
-				70C7A47E1F9B0BE300131C31 /* des.c */,
-				70C7A47D1F9B0BE300131C31 /* des.h */,
-				70C7A4801F9B0BE400131C31 /* DPCryptoUtility.h */,
-				70C7A47C1F9B0BE200131C31 /* DPCryptoUtility.m */,
+				70C7A4801F9B0BE400131C31 /* ZTCryptoUtility.h */,
+				70C7A47C1F9B0BE200131C31 /* ZTCryptoUtility.m */,
 				70C7A4771F9B0BDA00131C31 /* DPQiniuUtility.h */,
 				70C7A4781F9B0BDA00131C31 /* DPQiniuUtility.m */,
 				70C7A4751F9B0BD200131C31 /* DPOSSUtility.h */,
@@ -331,20 +331,20 @@
 			files = (
 				706CD2621F9831DE0044DB24 /* ViewController.m in Sources */,
 				706CD26D1F9831DE0044DB24 /* main.m in Sources */,
-				70C7A4821F9B0BE400131C31 /* des.c in Sources */,
 				706CD28D1F98878C0044DB24 /* ZTHttpManager.m in Sources */,
 				70C7A4791F9B0BDA00131C31 /* DPQiniuUtility.m in Sources */,
+				702AE9A31F9B353D007F9633 /* des.c in Sources */,
 				706CD2901F98A6C60044DB24 /* ZTResultObject.m in Sources */,
 				70C7A4731F9B094800131C31 /* QCloudUtil.m in Sources */,
 				70C7A4861F9B0BF700131C31 /* DPKeyChainUtility.m in Sources */,
 				706CD27C1F9834A80044DB24 /* ZTMPropertyAttribute.m in Sources */,
 				706CD2781F9833B70044DB24 /* ZTPObject.m in Sources */,
-				70C7A4811F9B0BE400131C31 /* DPCryptoUtility.m in Sources */,
+				70C7A4811F9B0BE400131C31 /* ZTCryptoUtility.m in Sources */,
 				706CD29A1F98D0470044DB24 /* ZTHttpRequest.m in Sources */,
+				702AE9A21F9B353D007F9633 /* bignum.c in Sources */,
 				706CD2811F9835890044DB24 /* ZTNetCache.m in Sources */,
 				70C7A4761F9B0BD200131C31 /* DPOSSUtility.m in Sources */,
 				706CD28A1F987A460044DB24 /* ZTHttpClient.m in Sources */,
-				70C7A4831F9B0BE400131C31 /* bignum.c in Sources */,
 				706CD25F1F9831DE0044DB24 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

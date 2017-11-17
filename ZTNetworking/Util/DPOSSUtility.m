@@ -2,12 +2,11 @@
 //  DPOSSUtility.m
 //  DPClientKit
 //
-//  Created by CoolCamel on 16/7/27.
 //  Copyright © 2016年 www.1919.cn. All rights reserved.
 //
 
 #import "DPOSSUtility.h"
-#import "DPCryptoUtility.h"
+#import "ZTCryptoUtility.h"
 
 @implementation DPOSSUtility
 
@@ -36,7 +35,7 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     NSLog(@"OSS Signature Error = %@", error);
     if(!error && policyData) {
         
-        policy = [DPCryptoUtility Base64EncodeWithData:policyData
+        policy = [ZTCryptoUtility Base64EncodeWithData:policyData
                                            EncodeTable:kBase64EncodingTable];
     }
     
@@ -47,10 +46,10 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
                                AccessKey:(NSString *)ak
                                SecretKey:(NSString *)sk {
     
-    NSData * sign = [DPCryptoUtility HmacSha1EncryptWithData:content
+    NSData * sign = [ZTCryptoUtility HmacSha1EncryptWithData:content
                                                          Key:sk];
     
-    NSString * encodedSign = [DPCryptoUtility Base64EncodeWithData:sign
+    NSString * encodedSign = [ZTCryptoUtility Base64EncodeWithData:sign
                                                        EncodeTable:kBase64EncodingTable];
     
     return encodedSign;
@@ -69,10 +68,10 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     [mutableURLString appendString:@"\n"];
     [mutableURLString appendString:uri];
     //添加Token参数
-    NSData * sign = [DPCryptoUtility HmacSha1EncryptWithData:mutableURLString
+    NSData * sign = [ZTCryptoUtility HmacSha1EncryptWithData:mutableURLString
                                                          Key:sk];
     
-    NSString * encodedSign = [DPCryptoUtility Base64EncodeWithData:sign
+    NSString * encodedSign = [ZTCryptoUtility Base64EncodeWithData:sign
                                                        EncodeTable:kBase64EncodingTable];
     
     return encodedSign;

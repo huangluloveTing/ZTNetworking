@@ -45,7 +45,7 @@ Pod::Spec.new do |s|
    # Util
    s.subspec 'Util' do |util|
 
-    util.source_files = 'ZTNetworking/Util/**/*.{h,m}'
+    util.source_files = 'ZTNetworking/Util/**/*'
 
    end
 

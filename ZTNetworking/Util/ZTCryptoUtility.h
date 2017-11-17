@@ -2,7 +2,7 @@
 //  DPCryptoUtility.h
 //  DepotNearby
 //
-//  Created by zhangjingwei on 15/11/18.
+//
 //  Copyright © 2015年 www.depotnearby.com. All rights reserved.
 //
 
@@ -12,9 +12,8 @@
  *  @author Jingwei Zhang, 15-11-18 14:11:25
  *
  *  @brief  加密解密工具类
- *  @since
  */
-@interface DPCryptoUtility : NSObject
+@interface ZTCryptoUtility : NSObject
 
 + (nonnull NSString *)makeHTTPQueryWithParameters:(nonnull NSDictionary *)parameters
                                             Token:(nonnull NSString *)token
@@ -29,7 +28,7 @@
  *
  *  @brief  生成一个UUID字符串
  *  @return UUID字符串
- *  @since
+ 
  */
 + (nonnull NSString *)makeUUID;
 
@@ -51,7 +50,6 @@
  *  @param GString  整数G字符串
  *  @param PString  素数P字符串
  *  @return 交换公钥数据
- *  @since
  */
 + (nonnull NSData *)makeDHPublicKeyWithXA:(nonnull NSString *)XAString
                                         G:(nonnull NSString *)GString
@@ -74,7 +72,6 @@
  *  @param XAString 随机数XA字符串
  *  @param PString  素数P字符串
  *  @return 加密密钥数据
- *  @since
  */
 + (nonnull NSData *)makeDHSecureKeyWithPK:(nonnull NSString *)PKString
                                        XA:(nonnull NSString *)XAString
@@ -87,7 +84,6 @@
  *  @brief MD5加密
  *  @param data 待加密数据
  *  @return 加密后数据
- *  @since
  */
 + (nonnull NSString *)MD5EncryptWithString:(nonnull NSString *)data;
 
@@ -97,9 +93,7 @@
  *
  *  @brief  Base 64 encode
  *  @param source origin string
- *  @param table  encode table
- *  @return encoded string
- *  @since
+ *  @return encodeTable string
  */
 + (nonnull NSString *)Base64EncodeWithString:(nonnull NSString *)source
                                  EncodeTable:(nonnull const uint8_t*)encodeTable;
@@ -108,9 +102,7 @@
  *
  *  @brief Base 64 encode
  *  @param data  origin data
- *  @param table  encode table
- *  @return encoded string
- *  @since 
+ *  @return encodeTable
  */
 + (nonnull NSString *)Base64EncodeWithData:(nonnull NSData *)data
                                EncodeTable:(nonnull const uint8_t*)encodeTable;
@@ -122,9 +114,6 @@
  *  @brief  数据进行DES加密
  *  @param data 待加密数据
  *  @param key  加密密钥
- *  @return 加密后数据
- *  @discussion 此函数不可用于过长文本
- *  @since
  */
 + (nonnull NSData *)DESEncryptWithData:(nonnull NSData *)data
                                    Key:(nonnull NSData *)key;
@@ -136,8 +125,6 @@
  *  @param data 待解密密数据
  *  @param key  加密密钥
  *  @return 解密后数据
- *  @discussion 此函数不可用于过长文本
- *  @since
  */
 + (nonnull NSData *)DESDecryptWithData:(nonnull NSData *)data
                                    Key:(nonnull NSData *)key;
@@ -150,8 +137,6 @@
  *  @param data 待加密数据
  *  @param key  加密密钥
  *  @return 加密后数据
- *  @discussion 此函数不可用于过长文本
- *  @since
  */
 + (nonnull NSData *)AES128CBCEncryptWithData:(nonnull NSData *)data
                                          Key:(nonnull NSData *)key
@@ -165,7 +150,6 @@
  *  @param key  加密密钥
  *  @return 解密后数据
  *  @discussion 此函数不可用于过长文本
- *  @since
  */
 + (nonnull NSData *)AES128CBCDecryptWithData:(nonnull NSData *)data
                                          Key:(nonnull NSData *)key
@@ -179,7 +163,6 @@
  *  @param key  加密密钥
  *  @return 加密后数据
  *  @discussion 此函数不可用于过长文本
- *  @since
  */
 + (nonnull NSData *)AES128ECBEncryptWithData:(nonnull NSData *)data
                                          Key:(nonnull NSData *)key;
@@ -192,7 +175,6 @@
  *  @param key  加密密钥
  *  @return 解密后数据
  *  @discussion 此函数不可用于过长文本
- *  @since
  */
 + (nonnull NSData *)AES128ECBDecryptWithData:(nonnull NSData *)data
                                          Key:(nonnull NSData *)key;
@@ -205,7 +187,6 @@
  *  @param key  加密密钥
  *  @return 加密后数据
  *  @discussion 此函数不可用于过长文本
- *  @since
  */
 + (nonnull NSData *)AES256EncryptWithData:(nonnull NSData *)data
                                       Key:(nonnull NSData *)key;
@@ -218,7 +199,6 @@
  *  @param key  加密密钥
  *  @return 解密后数据
  *  @discussion 此函数不可用于过长文本
- *  @since
  */
 + (nonnull NSData *)AES256DecryptWithData:(nonnull NSData *)data
                                       Key:(nonnull NSData *)key;
@@ -231,7 +211,6 @@
  *  @param data 待加密数据
  *  @param key  加密密钥
  *  @return 加密后数据
- *  @since
  */
 + (nonnull NSData *)HmacSha1EncryptWithData:(nonnull NSString *)data
                                         Key:(nonnull NSString *)key;
@@ -244,7 +223,6 @@
  *  @brief  数据进行SHA1加密
  *  @param data 待加密数据
  *  @return 加密后数据
- *  @since
  */
 + (nonnull NSData *)Sha1EncryptWithData:(nonnull NSData *)data;
 @end

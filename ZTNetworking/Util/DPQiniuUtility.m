@@ -2,12 +2,12 @@
 //  DPQiniuUtility.m
 //  Pods
 //
-//  Created by Gong Shutao on 16/4/25.
+
 //
 //
 
 #import "DPQiniuUtility.h"
-#import "DPCryptoUtility.h"
+#import "ZTCryptoUtility.h"
 
 @implementation DPQiniuUtility
 
@@ -23,7 +23,7 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     NSString * scope = [NSString stringWithFormat:@"%@:%@", space, key];
     NSString * saveName = [NSString stringWithFormat:@"%@:%@", space, key];
     
-    NSString * encodeSaveName = [DPCryptoUtility Base64EncodeWithString:saveName
+    NSString * encodeSaveName = [ZTCryptoUtility Base64EncodeWithString:saveName
                                                             EncodeTable:kBase64EncodingTable];
     
     persistentOps = [NSString stringWithFormat:@"imageView2/0/h/%d|saveas/%@", 640, encodeSaveName];
@@ -41,13 +41,13 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
         NSString * policyString = [[NSString alloc] initWithData:policyData
                                                         encoding:NSUTF8StringEncoding];
         
-        NSString * encodPolicy = [DPCryptoUtility Base64EncodeWithString:policyString
+        NSString * encodPolicy = [ZTCryptoUtility Base64EncodeWithString:policyString
                                                              EncodeTable:kBase64EncodingTable];
         
-        NSData * sign = [DPCryptoUtility HmacSha1EncryptWithData:encodPolicy
+        NSData * sign = [ZTCryptoUtility HmacSha1EncryptWithData:encodPolicy
                                                              Key:sk];
         
-        NSString * encodedSign = [DPCryptoUtility Base64EncodeWithData:sign
+        NSString * encodedSign = [ZTCryptoUtility Base64EncodeWithData:sign
                                                            EncodeTable:kBase64EncodingTable];
         
         return [NSString stringWithFormat:@"%@:%@:%@", ak, encodedSign, encodPolicy];
@@ -63,10 +63,10 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     NSMutableString * mutableURLString =[NSMutableString stringWithString:url];
     
     //添加Token参数
-    NSData * encryptSK = [DPCryptoUtility HmacSha1EncryptWithData:mutableURLString
+    NSData * encryptSK = [ZTCryptoUtility HmacSha1EncryptWithData:mutableURLString
                                                               Key:sk];
     
-    NSString * token = [NSString stringWithFormat:@"%@:%@", ak, [DPCryptoUtility Base64EncodeWithData:encryptSK
+    NSString * token = [NSString stringWithFormat:@"%@:%@", ak, [ZTCryptoUtility Base64EncodeWithData:encryptSK
                                                                                           EncodeTable:kBase64EncodingTable]];
     return token;
 }

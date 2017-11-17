@@ -2,20 +2,19 @@
 //  DPCryptoUtility.m
 //  DepotNearby
 //
-//  Created by zhangjingwei on 15/11/18.
 //  Copyright © 2015年 www.depotnearby.com. All rights reserved.
 //
 
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCrypto.h>
 
-#import "DPCryptoUtility.h"
+#import "ZTCryptoUtility.h"
 #import "bignum.h"
 
 static UInt32 kQRDBlockSize = 4 * 1024 * 1024;
 
 
-@implementation DPCryptoUtility
+@implementation ZTCryptoUtility
 
 static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
@@ -23,14 +22,14 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
                                     Token:(NSString *)token
                                  PostData:(NSString *)postData {
     
-    NSString * query = [DPCryptoUtility makeHTTPQueryWithDictionary:parameters IsSigned:NO];
+    NSString * query = [ZTCryptoUtility makeHTTPQueryWithDictionary:parameters IsSigned:NO];
     
     NSMutableString * signString = [NSMutableString string];
     if(query) [signString appendString:query];
     if(token) [signString appendString:token];
     if(postData) [signString appendString:postData];
     
-    NSString * sign = [NSString stringWithFormat:@"%@&sign=%@", query, [DPCryptoUtility MD5EncryptWithString:signString]];
+    NSString * sign = [NSString stringWithFormat:@"%@&sign=%@", query, [ZTCryptoUtility MD5EncryptWithString:signString]];
     return [NSString stringWithString:sign];
 }
 
@@ -67,7 +66,7 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     
     if(isSigned) {
         
-        NSString * sign = [DPCryptoUtility MD5EncryptWithString:query];
+        NSString * sign = [ZTCryptoUtility MD5EncryptWithString:query];
         [query appendString:@"sign"];
         [query appendString:@"="];
         [query appendString:sign];
@@ -108,7 +107,7 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
         CC_SHA1(pblocksSha1, (CC_LONG)CC_SHA1_DIGEST_LENGTH * count, ret + 1);
     }
     
-    return [DPCryptoUtility Base64EncodeWithData:retData
+    return [ZTCryptoUtility Base64EncodeWithData:retData
                                      EncodeTable:kBase64EncodingTable];
 }
 
@@ -213,7 +212,7 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     
     NSUInteger length = [source lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     NSData *data = [NSData dataWithBytes:[source UTF8String] length:length];
-    return [DPCryptoUtility Base64EncodeWithData:data
+    return [ZTCryptoUtility Base64EncodeWithData:data
                                      EncodeTable:encodeTable];
 }
 

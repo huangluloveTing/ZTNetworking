@@ -2,7 +2,7 @@
 //  DPOSSUtility.h
 //  DPClientKit
 //
-//  Created by CoolCamel on 16/7/27.
+
 //  Copyright © 2016年 www.1919.cn. All rights reserved.
 //
 

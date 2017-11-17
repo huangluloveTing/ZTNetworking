@@ -2,7 +2,7 @@
 //  DPQiniuUtility.h
 //  Pods
 //
-//  Created by Gong Shutao on 16/4/25.
+
 //
 //
 
