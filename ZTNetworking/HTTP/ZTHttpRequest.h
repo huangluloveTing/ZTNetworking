@@ -27,9 +27,10 @@ static NSString * _Nullable const  RequestType_Normal = @"UPLOAD_NORMAL";
 
 @property (nonatomic , strong , nullable , readwrite) NSString *aynac; //是否串行
 
-@property (nonatomic , strong , nullable , readwrite) NSString *taskName; //是否串行
+@property (nonatomic , strong , nullable , readwrite) NSString *taskName; //任务名称
 
 @property (nonatomic , strong , nullable , readwrite) NSString *requestType; //
+
 //扩张的字段
 @property (nonatomic , strong , nullable , readwrite) NSString *extra; //
 

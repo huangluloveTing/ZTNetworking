@@ -23,10 +23,12 @@
 - (void) saveData:(id<PZTObject>)data {
     [self createTableName:data];
 }
+
 //根据id 查询对象
 - (id)   queryForEntity:(id<PZTObject>)entity queryValue:(NSString *)queryValue column:(NSString *)columnName {
     return [self getCacheObject:entity queryNmae:queryValue ColumnName:columnName];
 }
+
 //查询所有的数据
 - (NSArray *)queryAllDataWithEntity:(id<PZTObject>)entity {
     return [self getAllCachedEntity:entity];

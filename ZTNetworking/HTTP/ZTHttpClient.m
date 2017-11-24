@@ -47,6 +47,28 @@
     [self.sessionManager.securityPolicy setValidatesDomainName:NO];
 }
 
+- (NSURLSessionDataTask *) perfrom_normal_get_URL:(NSString *)url
+                                       Parameters:(NSDictionary *)parameters
+                                          Headers:(NSDictionary *)headers
+                                       Completion:(NormalRequestCompletion)completion {
+    return [self.sessionManager GET:url
+                         parameters:parameters
+                           progress:nil
+                            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                id object = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+#if DEBUG
+                                NSLog(@"retObject = %@" , object);
+#endif
+                                completion(object , nil);
+                            }
+                            failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+#if DEBUG
+                                NSLog(@"error = %@" , error.localizedDescription);
+#endif
+                                completion(nil , error);
+    }];
+}
+
 - (NSURLSessionDataTask *) perfrom_normal_post_URL:(NSString *)url
                                         Parameters:(NSDictionary *)parameters
                                            Headers:(nullable NSDictionary *)headers

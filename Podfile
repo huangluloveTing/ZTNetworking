@@ -4,5 +4,6 @@ target 'ZTNetworking' do
 
 pod 'AFNetworking'
 pod 'FMDB'
+pod 'Qiniu', '~> 7.1'
 
 end

@@ -92,6 +92,10 @@ static ZTHttpManager *manager = nil;
     [_httpClient setRequestTimeOut:timeOut];
 }
 
+- (void) setPinnedCertificates:(NSArray *)certificates {
+    [_httpClient setPinnedCertificates:certificates];
+}
+
 - (NSString *) getCacheTempFileDir {
     return Save_File_Dir;
 }
@@ -129,6 +133,19 @@ static ZTHttpManager *manager = nil;
 - (void) initQueue {
     _rest_queue = dispatch_queue_create("com.jlb.rest.queue.thread", DISPATCH_QUEUE_SERIAL);
     _upload_queue = dispatch_queue_create("com.jlb.upload.queue.thread", DISPATCH_QUEUE_SERIAL);
+}
+
+- (NSURLSessionDataTask *) perform_GetRequest_URI:(NSString *)uri
+                                       Parameters:(NSDictionary *)parameters
+                                          Headers:(NSDictionary *)headers
+                                       Completion:(ZTNormalRequestCompletion)completion {
+    
+    NSString *url = [NSString stringWithFormat:@"%@%@" , self.normalHost , uri];
+    
+    return [_httpClient perfrom_normal_get_URL:url
+                                    Parameters:parameters
+                                       Headers:headers
+                                    Completion:completion];
 }
 
 - (NSURLSessionDataTask *) perform_PostRequest_URI:(NSString *)uri
@@ -608,6 +625,62 @@ static ZTHttpManager *manager = nil;
             }
         }
     }
+}
+
+- (NSURLSessionDataTask *)perform_Upload_Qiniu_Key:(NSString *)QKey
+                                        BucketName:(nonnull NSString *)bucketName
+                                          TaskName:(NSString *)taskName
+                                            Binary:(NSData *)fileData
+                                            IsBack:(BOOL)isBack
+                                         SecretKey:(nonnull NSString *)secretKey
+                                          Progress:(ZTUploadProgressBlock)progress
+                                        Completion:(ZTUploadRequestCompletion)completion {
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@" , self.icloudHost];
+    
+    //构造上传凭证
+    NSString *scope = [NSString stringWithFormat:@"%@:%@" , bucketName , QKey];
+    NSString *deadline = [NSString stringWithFormat:@"%.f" , [[NSDate date] timeIntervalSince1970] * 1000 + 3600];
+    NSDictionary *uploadPolocy = @{
+                                   @"scope":scope,
+                                   @"deadline":deadline
+                                   };
+    NSString *policy = [QCloudUtil makePolicyWithParameters:uploadPolocy];
+    NSString *sign = [QCloudUtil makeSignatureSha1WithSecretKey:secretKey Policy:policy];
+    NSString *uploadToken = [NSString stringWithFormat:@"%@:%@:%@", secretKey , sign , policy];
+    
+    NSDictionary *paramters = @{
+                                @"token":uploadToken,
+                                @"key":QKey
+                                };
+    
+    ZTHttpRequest *ztRequest = [[ZTHttpRequest alloc] init];
+    ztRequest.parameters = paramters;
+    ztRequest.identifier = [NSString stringWithFormat:@"%.f",[NSDate date].timeIntervalSince1970 * 1000];
+    ztRequest.fileName = QKey;
+    ztRequest.name = QKey;
+    ztRequest.url = url;
+    ztRequest.requestType = RequestType_UploadFile;
+    ztRequest.taskName = taskName;
+    if (isBack) {
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@.tmp" , Save_File_Dir , ztRequest.identifier];
+        [fileData writeToFile:filePath atomically:YES];
+        [self.netCache saveData:ztRequest];
+        NSURLSessionDataTask *task = [self perform_backUploadRequest:ztRequest Back:YES Completion:completion];
+        [self enquenUploadQueun:task Request:ztRequest];
+        
+        return task;
+    }
+    
+    return [self perform_uploadRequest_URL:url
+                                Parameters:paramters
+                                   Headers:nil
+                                      Name:QKey
+                                  FileName:QKey
+                                    Binary:fileData
+                                  Progress:progress
+                                Completion:completion];
 }
 
 @end

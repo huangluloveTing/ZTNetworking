@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ZTNetworking"
-  s.version      = "1.1.0"
+  s.version      = "1.1.1"
   s.summary      = "一个基于AF 的网络框架"
 
   s.homepage     = "https://github.com/huangluloveTing/ZTNetworking.git"
@@ -48,5 +48,11 @@ Pod::Spec.new do |s|
     util.source_files = 'ZTNetworking/Util/**/*'
 
    end
+
+   # 提交命令
+   # 语法验证
+   # pod spec lint ZTNetworking.podspec --use-libraries --allow-warnings --verbose
+   # 提交 
+   # pod trunk push ZTNetworking.podspec --use-libraries --allow-warnings --verbose
 
 end

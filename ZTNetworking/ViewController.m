@@ -11,10 +11,10 @@
 
 
 #ifdef DEBUG
-static NSString *const QCloundIP = @"https://pek3a.qingstor.com/";
-static NSString *const QCloud_Access_key_Id = @"VLYGXZQWCZUJJLKGFSKK";
-static NSString *const QCloud_Secret_Access_key = @"9shVhM8DQgVqgnZxFrKUQ2IYBC0mwUDMsiPpKkOn";
-static NSString *const QCloud_Bucket_Name = @"yanghe-sfa-20170707";
+static NSString *const QCloundIP = @"http://ozsymqi0d.bkt.clouddn.com/";
+static NSString *const QCloud_Access_key_Id = @"c7JN1kstps9ZQ61NnqgBA2tK5orSA9SlIWr5q7rt";
+static NSString *const QCloud_Secret_Access_key = @"WlKpyUStQkqRHcxScciHHqwYkQGrV38UcV8UjjzT";
+static NSString *const QCloud_Bucket_Name = @"demo";
 
 #else
 
@@ -93,7 +93,7 @@ static NSString *const QCloud_Bucket_Name = @"yanghesfa";
         data = UIImageJPEGRepresentation(image, 1);
     }
     
-    [[ZTHttpManager sharedManager] setNormalHost:@"" UploadHost:@"" ICloudBuketHost:[NSString stringWithFormat:@"%@%@", QCloundIP,QCloud_Bucket_Name]];
+    [[ZTHttpManager sharedManager] setNormalHost:@"" UploadHost:@"" ICloudBuketHost:[NSString stringWithFormat:@"%@", QCloundIP]];
     [[ZTHttpManager sharedManager] setQinyun_Access_key_id:QCloud_Access_key_Id SecretKey:QCloud_Secret_Access_key];
     
 //    self.dataTask = [[ZTHttpManager sharedManager] perform_BackUploadRequest_URI:@""
@@ -108,19 +108,19 @@ static NSString *const QCloud_Bucket_Name = @"yanghesfa";
 //                                                                      Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
 //
 //    }];
-    NSString *path = @"拜访CHECK/30020937/20171021/啦啦啦啦啦/门头采集/改善前jjjj1508564444582.jpg";
-    self.dataTask2 = [[ZTHttpManager sharedManager] perform_Upload_Qinyun_FilePath:path
-                                                                          TaskName:@"picture"
-                                                                            Binary:data
-                                                                            IsBack:NO
-                                                                          Progress:^(CGFloat totalUnitCount, CGFloat completedProgress) {
+    NSString *path = @"508564444582.jpg";
+    self.dataTask2 = [[ZTHttpManager sharedManager] perform_Upload_Qiniu_Key:path
+                                                                  BucketName:QCloud_Bucket_Name
+                                                                    TaskName:@"demo"
+                                                                      Binary:data
+                                                                      IsBack:NO
+                                                                   SecretKey:QCloud_Secret_Access_key
+                                                                    Progress:^(CGFloat totalUnitCount, CGFloat completedProgress) {
+                                                                        NSLog(@"current = %.2f" , completedProgress);
+    }
+                                                                  Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
         
-    
-                                                                          }
-                                                                        Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
-        
-    
-                                                                        }];
+    }];
 }
 
 

@@ -23,6 +23,7 @@
 		706CD28D1F98878C0044DB24 /* ZTHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD28C1F98878C0044DB24 /* ZTHttpManager.m */; };
 		706CD2901F98A6C60044DB24 /* ZTResultObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD28F1F98A6C60044DB24 /* ZTResultObject.m */; };
 		706CD29A1F98D0470044DB24 /* ZTHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 706CD2991F98D0470044DB24 /* ZTHttpRequest.m */; };
+		707C82191FC53B14003F9921 /* home.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 707C82181FC53B13003F9921 /* home.jpg */; };
 		70C7A4731F9B094800131C31 /* QCloudUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A4701F9B093400131C31 /* QCloudUtil.m */; };
 		70C7A4761F9B0BD200131C31 /* DPOSSUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A4741F9B0BD200131C31 /* DPOSSUtility.m */; };
 		70C7A4791F9B0BDA00131C31 /* DPQiniuUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C7A4781F9B0BDA00131C31 /* DPQiniuUtility.m */; };
@@ -65,6 +66,7 @@
 		706CD2911F98A7A20044DB24 /* ZTHttpConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTHttpConst.h; sourceTree = "<group>"; };
 		706CD2981F98D0470044DB24 /* ZTHttpRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTHttpRequest.h; sourceTree = "<group>"; };
 		706CD2991F98D0470044DB24 /* ZTHttpRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZTHttpRequest.m; sourceTree = "<group>"; };
+		707C82181FC53B13003F9921 /* home.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home.jpg; sourceTree = "<group>"; };
 		70C7A46B1F9ADB2100131C31 /* ZTNetWorking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZTNetWorking.h; sourceTree = "<group>"; };
 		70C7A4701F9B093400131C31 /* QCloudUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QCloudUtil.m; sourceTree = "<group>"; };
 		70C7A4711F9B093400131C31 /* QCloudUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QCloudUtil.h; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				706CD2611F9831DE0044DB24 /* ViewController.m */,
 				706CD2631F9831DE0044DB24 /* Main.storyboard */,
 				706CD2661F9831DE0044DB24 /* Assets.xcassets */,
+				707C82181FC53B13003F9921 /* home.jpg */,
 				706CD2681F9831DE0044DB24 /* LaunchScreen.storyboard */,
 				706CD26B1F9831DE0044DB24 /* Info.plist */,
 				706CD26C1F9831DE0044DB24 /* main.m */,
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				706CD26A1F9831DE0044DB24 /* LaunchScreen.storyboard in Resources */,
+				707C82191FC53B14003F9921 /* home.jpg in Resources */,
 				706CD2671F9831DE0044DB24 /* Assets.xcassets in Resources */,
 				706CD2651F9831DE0044DB24 /* Main.storyboard in Resources */,
 			);
@@ -298,13 +302,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZTNetworking-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FF7AE3F3E87F8168A9E7BD6D /* [CP] Copy Pods Resources */ = {

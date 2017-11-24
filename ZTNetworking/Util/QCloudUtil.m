@@ -37,6 +37,14 @@ static uint8_t const QBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     return encodedSign;
 }
 
++ (NSString *) makeSignatureSha1WithSecretKey:(NSString *)secretKey
+                                       Policy:(NSString *)policy {
+    
+    NSString * encodedSign = [QCloudUtil hmacSha1:secretKey text:policy];
+    
+    return encodedSign;
+}
+
 + (NSData *)HmacSha256EncryptWithData:(NSString *)data Key:(NSString *)key {
     
     const char *cKey  = [key cStringUsingEncoding:NSUTF8StringEncoding];
@@ -81,6 +89,33 @@ static uint8_t const QBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     }
     
     return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
+}
+
++ (NSString *)hmacSha1:(NSString*)key text:(NSString*)text
+
+{
+    const char *cKey  = [key cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    const char *cData = [text cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    uint8_t cHMAC[CC_SHA1_DIGEST_LENGTH];
+    
+    CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+    
+    //NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:CC_SHA1_DIGEST_LENGTH];
+    
+    NSString *hash;
+    
+    NSMutableString * output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+        
+        [output appendFormat:@"%02x", cHMAC[i]];
+    
+    hash = output;
+    
+    return hash;
+    
 }
 
 @end

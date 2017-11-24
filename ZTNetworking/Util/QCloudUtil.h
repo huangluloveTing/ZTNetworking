@@ -15,4 +15,7 @@
 + (NSString *)makeSignatureWithSecretKey:(NSString *)secretKey
                                   Policy:(NSString *)policy;
 
++ (NSString *)makeSignatureSha1WithSecretKey:(NSString *)secretKey
+                                      Policy:(NSString *)policy;
+
 @end

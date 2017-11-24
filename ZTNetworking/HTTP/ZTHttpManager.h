@@ -24,7 +24,7 @@ typedef void(^ZTUploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedP
 typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nullable error , id _Nullable requestObject);
 
 /**
- 建议集成该类，然后写业务方面的接口 ， 对于 离线的 状态判断，需要自己重写 成功 判断
+ 建议继承该类，然后写业务方面的接口 ， 对于 离线的 状态判断，需要自己重写 成功 判断
  */
 @interface ZTHttpManager : NSObject
 
@@ -68,6 +68,13 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  */
 - (void)setRequestTimeout:(CGFloat)timeOut;
 
+/**
+ 设置证书
+
+ @param certificates certificates description
+ */
+- (void) setPinnedCertificates:(nullable NSArray *)certificates;
+
 
 /**
  当前所有普通队列
@@ -95,6 +102,20 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  启动未完成的离线队列
  */
 - (void) restartAllOfflineQueue;
+
+/**
+ 普通GET 请求接口
+
+ @param uri uri
+ @param parameters 参数
+ @param headers 请求头
+ @param completion block
+ @return return value description
+ */
+- (nullable NSURLSessionDataTask *) perform_GetRequest_URI:(nonnull NSString *)uri
+                                                Parameters:(nullable NSDictionary *) parameters
+                                                   Headers:(nullable NSDictionary *) headers
+                                                Completion:(nullable ZTNormalRequestCompletion)completion;
 
 /**
  普通网络请求接口
@@ -195,6 +216,27 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
                                                         Completion:(nullable ZTUploadRequestCompletion)completion;
 
 
+/**
+ 七牛上传
+
+ @param QKey 七牛key
+ @param taskName 任务名称
+ @param fileData 文件二进制
+ @param isBack 是否后台
+ @param progress 进度
+ @param completion 回调
+ @return return
+ */
+- (nullable NSURLSessionDataTask *) perform_Upload_Qiniu_Key:(nonnull NSString *)QKey
+                                                  BucketName:(nonnull NSString *)bucketName
+                                                    TaskName:(nullable NSString *)taskName
+                                                      Binary:(nonnull NSData *)fileData
+                                                      IsBack:(BOOL)isBack
+                                                   SecretKey:(nonnull NSString *)secretKey
+                                                    Progress:(nullable ZTUploadProgressBlock)progress
+                                                  Completion:(nullable ZTUploadRequestCompletion)completion;
+
+
 #pragma mark - 需重写的方法
 /**
  针对文件上传离线 时 ， 判断返回数据 是否 是成功的判断
@@ -202,14 +244,16 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  @param retObject 服务端返回的数据
  @return return
  */
-- (BOOL) uploadRequestSuccessForRetObject:(nullable id)retObject Request:(nullable ZTHttpRequest *) request;
+- (BOOL) uploadRequestSuccessForRetObject:(nullable id)retObject
+                                  Request:(nullable ZTHttpRequest *) request;
 
 /**
  针对普通数据 离线 时 ， 判断返回数据 是否 是成功的判断
  @param retObject 服务端返回数据
  @return return value descriptio
  */
-- (BOOL) restRequestSuccessForRetObject:(nullable id)retObject Request:(nullable ZTHttpRequest *)request;
+- (BOOL) restRequestSuccessForRetObject:(nullable id)retObject
+                                Request:(nullable ZTHttpRequest *)request;
 
 
 
