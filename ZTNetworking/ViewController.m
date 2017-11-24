@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "ZTNetWorking.h"
+#import "Student.h"
 
 
 #ifdef DEBUG
@@ -38,18 +39,19 @@ static NSString *const QCloud_Bucket_Name = @"yanghesfa";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    ZTNetCache *cache = [[ZTNetCache alloc] init];
-//    Student *st = [[Student alloc] init];
-//    st.name = @"hl";
+    ZTNetCache *cache = [[ZTNetCache alloc] init];
+    Student *st = [[Student alloc] init];
+    st.name = @"hl";
+    st.hobby = @"haha";
+    st.email = @"1234";
 
-//    [cache saveData:st];
-//    [cache saveData:st2];
+    [cache saveData:st];
 //
-//   NSArray *rresults = [cache queryAllDataWithEntity:st];
+   NSArray *rresults = [cache queryAllDataWithEntity:st];
 //
-//    for (NSDictionary *s  in rresults) {
-//        NSLog(@" re = %@ " , s);
-    //    }- ERROR | [iOS] unknown: Encountered an unknown error (Unable to find a specification for `XSLKeyChainCache (~> 0.1.0)` depended upon by `XSLOpenUDID`) during validation.
+    for (NSDictionary *s  in rresults) {
+        NSLog(@" re = %@ " , s);
+    }
     
 //
 //    Student *su = [Student serializeWithJsonObject:rresults.firstObject];

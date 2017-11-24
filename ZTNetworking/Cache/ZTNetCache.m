@@ -48,6 +48,7 @@
     }
     
     __block NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (Id integer PRIMARY KEY AUTOINCREMENT %@);" , tableName , columnSql];
+
     [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
         if ([db open]) {
            BOOL result =  [db executeUpdate:sql];
@@ -59,9 +60,17 @@
         }
         [db close];
     }];
+    
+    [self confirmTableColumnWith:queryObject];
     [self saveDataToTable:queryObject];
 }
 
+
+/**
+ 保存数据
+
+ @param data return
+ */
 - (void) saveDataToTable:(id<PZTObject>)data {
     NSDictionary *dataDic = [data toJsonObject];
     NSArray *allColumns = [data allPropertyNames];
@@ -111,7 +120,9 @@
     }];
 }
 
-- (id) getCacheObject:(id<PZTObject>)queryObject queryNmae:(NSString *)queryKey ColumnName:(NSString *)columnName{
+- (id) getCacheObject:(id<PZTObject>)queryObject
+            queryNmae:(NSString *)queryKey
+           ColumnName:(NSString *)columnName{
     NSString *tableName = NSStringFromClass(queryObject.class);
     NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@=?;" , tableName , columnName];
     NSMutableArray *tempAr= [NSMutableArray array];
@@ -135,6 +146,12 @@
     return tempAr;
 }
 
+/**
+ 根据 实体 获取所有数据
+
+ @param entity 实体
+ @return return
+ */
 - (NSArray *) getAllCachedEntity:(id<PZTObject>)entity {
     NSString *sql = [NSString stringWithFormat:@"select * from %@;" , entity.class];
     NSMutableArray *tempAr= [NSMutableArray array];
@@ -158,6 +175,14 @@
     return tempAr;
 }
 
+
+/**
+ 根据字段名称删除 数据
+
+ @param entity 对象
+ @param queryValue 值
+ @param columnName 字段名
+ */
 - (void) deleteForEntity:(id<PZTObject>)entity columnValue:(NSString *)queryValue column:(NSString *)columnName  {
     NSString *tableName = NSStringFromClass(entity.class);
     NSString *sql = [NSString stringWithFormat:@"delete from %@ where %@ = ?" , tableName , columnName];
@@ -186,6 +211,30 @@
     }
     
     return _databaseQueue;
+}
+
+
+/**
+ 判断表里的字段是否和对象一样
+
+ @param table 对象
+ */
+- (void) confirmTableColumnWith:(id<PZTObject>)table {
+    NSArray *allKeys = [[table toJsonObject] allKeys];
+    [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        if ([db open]) {
+            for (NSString *column in allKeys) {
+                BOOL result = [db columnExists:column inTableWithName:NSStringFromClass([table class])];
+                if (! result) {
+                    NSString *alter = [NSString stringWithFormat:@"ALTER TABLE %@ ADD COLUMN %@ text;" , [table class] , column];
+                    result = [db executeUpdate:alter];
+                    if (result) {
+                        NSLog(@"新增表成功");
+                    }
+                }
+            }
+        }
+    }];
 }
 
 
