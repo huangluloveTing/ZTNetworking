@@ -683,4 +683,17 @@ static ZTHttpManager *manager = nil;
                                 Completion:completion];
 }
 
+- (void) perform_Upload_Qiniu_Key:(NSString *)QKey
+                           Binary:(NSData *)fileData
+                            Token:(NSString *)token
+                         Progress:(ZTUploadProgressBlock)progress
+                       Completion:(ZTUploadRequestCompletion)completion {
+    
+    [_httpClient perform_QiniuUpload_Token:token
+                                      Data:fileData
+                                       Key:QKey
+                                  Progress:progress
+                                Completion:completion];
+}
+
 @end

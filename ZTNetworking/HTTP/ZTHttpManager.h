@@ -236,6 +236,21 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
                                                     Progress:(nullable ZTUploadProgressBlock)progress
                                                   Completion:(nullable ZTUploadRequestCompletion)completion;
 
+/**
+ 七牛上传
+
+ @param QKey QKey description
+ @param fileData fileData description
+ @param token token description
+ @param progress progress description
+ @param completion completion description
+ */
+- (void) perform_Upload_Qiniu_Key:(nonnull NSString *)QKey
+                                                      Binary:(nonnull NSData *)fileData
+                                                       Token:(nonnull NSString *)token
+                                                    Progress:(nullable ZTUploadProgressBlock)progress
+                                                  Completion:(nullable ZTUploadRequestCompletion)completion;
+
 
 #pragma mark - 需重写的方法
 /**

@@ -1269,9 +1269,9 @@ int mpi_div_mpi( mpi *Q, mpi *R, const mpi *A, const mpi *B )
             m = q1 * d0;
             if( r1 < m )
             {
-                q1--, r1 += d;
+                (void)(q1--), r1 += d;
                 while( r1 >= d && r1 < m )
-                    q1--, r1 += d;
+                    (void)(q1--), r1 += d;
             }
             r1 -= m;
 
@@ -1283,9 +1283,9 @@ int mpi_div_mpi( mpi *Q, mpi *R, const mpi *A, const mpi *B )
             m = q0 * d0;
             if( r0 < m )
             {
-                q0--, r0 += d;
+                (void)(q0--), r0 += d;
                 while( r0 >= d && r0 < m )
-                    q0--, r0 += d;
+                    (void)(q0--), r0 += d;
             }
             r0 -= m;
 
