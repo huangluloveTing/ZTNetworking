@@ -110,19 +110,6 @@ static NSString *const QCloud_Bucket_Name = @"yanghesfa";
 //                                                                      Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
 //
 //    }];
-    NSString *path = @"508564444582.jpg";
-    self.dataTask2 = [[ZTHttpManager sharedManager] perform_Upload_Qiniu_Key:path
-                                                                  BucketName:QCloud_Bucket_Name
-                                                                    TaskName:@"demo"
-                                                                      Binary:data
-                                                                      IsBack:NO
-                                                                   SecretKey:QCloud_Secret_Access_key
-                                                                    Progress:^(CGFloat totalUnitCount, CGFloat completedProgress) {
-                                                                        NSLog(@"current = %.2f" , completedProgress);
-    }
-                                                                  Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
-        
-    }];
 }
 
 

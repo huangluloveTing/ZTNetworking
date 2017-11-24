@@ -7,12 +7,16 @@
 //
 
 #import "ZTHttpClient.h"
+#import <QiniuSDK.h>
 
 @interface ZTHttpClient ()
 
 @property (nonatomic , strong) AFHTTPSessionManager *sessionManager;
 
 @property (nonatomic , assign) CGFloat timeout; //超时时间
+
+//七牛上传 manager
+@property (nonatomic , strong) QNUploadManager *qnUploadManager;
 
 @end
 
@@ -26,6 +30,7 @@
         AFHTTPResponseSerializer *serializer = [[AFHTTPResponseSerializer alloc] init];
         serializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html",@"text/xml",@"text/json", @"text/javascript", nil];
         self.sessionManager.responseSerializer = serializer;
+        self.qnUploadManager = [[QNUploadManager alloc] init];
     }
     
     return self;
@@ -143,6 +148,30 @@
     }];
     
     return taske;
+}
+
+- (void) perform_QiniuUpload_Token:(NSString *)token
+                              Data:(NSData *)data
+                               Key:(NSString *)key
+                          Progress:(nullable UploadProgressBlock)progress
+                        Completion:(UploadRequestCompletion)completion {
+    QNUploadOption *option = [[QNUploadOption alloc] initWithMime:nil
+                                                  progressHandler:^(NSString *key, float percent) {
+                                                  }
+                                                           params:@{
+                                                                    }
+                                                         checkCrc:NO cancellationSignal:nil];
+    [self.qnUploadManager putData:data
+                              key:key
+                            token:token
+                         complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+                            if (resp) {
+                                completion(resp , nil);
+                            } else {
+                                completion(nil , info.error);
+                            }
+                         }
+                           option:option];
 }
 
 

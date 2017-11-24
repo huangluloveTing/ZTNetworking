@@ -103,7 +103,11 @@ typedef void(^UploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedUni
 //                                              Progress:(nullable UploadProgressBlock)progress
 //                                            Completion:(nullable UploadRequestCompletion)completion;
 
-//- (nullable NSURLSessionDataTask *)
+- (void) perform_QiniuUpload_Token:(nonnull NSString *)token
+                              Data:(nullable NSData *) data
+                               Key:(nonnull NSString *)key
+                          Progress:(nullable UploadProgressBlock)progress
+                        Completion:(nullable UploadRequestCompletion)completion;
 
 
 @end
