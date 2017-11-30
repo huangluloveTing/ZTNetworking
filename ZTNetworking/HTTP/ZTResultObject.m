@@ -9,27 +9,27 @@
 #import "ZTResultObject.h"
 #import "ZTHttpConst.h"
 
-@implementation ZTResultObject
 
-- (NSError *) checkResult {
-    
-    if (self.head.code.integerValue == ZT_Http_Success_Code.integerValue ||
-        self.head.code.integerValue == ZT_Http_Update_Code.integerValue) {
-        return nil;
-    }
-    
-    NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
-                                         code:self.head.code.integerValue
-                                     userInfo:@{
-                                                NSLocalizedDescriptionKey : self.head.message ? :@""
-                                                }];
-    
-    return error;
-}
+
+@implementation ZTResultObject
 
 @end
 
 @implementation ZTHttpResultHeaderObject
+
+- (NSError *) chechResult {
+    if (self.status.integerValue == ZT_Http_Success_Code.integerValue) {
+        return nil;
+    }
+    
+    NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                         code:self.status.integerValue
+                                     userInfo:@{
+                                                NSLocalizedDescriptionKey : [self valueForKey:@"result"] ?: @""
+                                                }];
+    
+    return error;
+}
 
 @end
 

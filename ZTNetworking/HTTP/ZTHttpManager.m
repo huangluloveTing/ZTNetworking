@@ -8,7 +8,6 @@
 
 #import "ZTHttpManager.h"
 #import "ZTHttpClient.h"
-#import "ZTResultObject.h"
 #import "QCloudUtil.h"
 
 #define Save_File_Dir ([NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject])

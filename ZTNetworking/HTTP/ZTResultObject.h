@@ -15,20 +15,31 @@
 
 @interface ZTHttpResultHeaderObject : ZTPObject
 
-@property (nonatomic , copy) NSString *code;
+//业务code
+@property (nonatomic , strong , readwrite) NSString *code;
 
-@property (nonatomic , copy) NSString *message;
+//id
+@property (nonatomic , strong , readwrite) NSString *requestId;
 
-@property (nonatomic , copy) NSString *ts;
+//
+@property (nonatomic , strong , readwrite) NSString *reqTime;
+
+//
+@property (nonatomic , strong , readwrite) NSString *resTime;
+
+//
+@property (nonatomic , strong , readwrite) NSString *remark;
+
+//
+@property (nonatomic , strong , readwrite) NSString *status;
+
+- (NSError *) chechResult;
 
 @end;
 
 @interface ZTResultObject : ZTPObject
 
 @property (nonatomic , strong) ZTHttpResultHeaderObject *head;
-
-
-- (NSError *) checkResult;
 
 @end
 
@@ -49,4 +60,5 @@ DCM_Generic_Custom_Json_Result_Define(Dictionary, NSDictionary)
 DCM_Generic_Custom_Json_Result_Define(Array, NSArray)
 DCM_Generic_Custom_Json_Result_Define(String, NSString)
 DCM_Generic_Custom_Json_Result_Define(Number, NSNumber)
+
 

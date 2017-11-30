@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ZTNetworking"
-  s.version      = "1.1.3"
+  s.version      = "1.2.0"
   s.summary      = "一个基于AF 的网络框架"
 
   s.homepage     = "https://github.com/huangluloveTing/ZTNetworking.git"
@@ -32,6 +32,7 @@ Pod::Spec.new do |s|
     ht.dependency 'ZTNetworking/Cache'
     ht.dependency 'ZTNetworking/Util'
     ht.dependency 'AFNetworking'
+    ht.dependency 'Qiniu'
 
    end
 

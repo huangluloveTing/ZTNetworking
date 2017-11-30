@@ -9,7 +9,7 @@
 #ifndef ZTHttpConst_h
 #define ZTHttpConst_h
 
-static NSString * const ZT_Http_Success_Code = @"100";  //成功的code
+static NSString * const ZT_Http_Success_Code = @"200";  //成功的code
 
 static NSString * const ZT_Http_Update_Code = @"101";   //监测版本的code
 
