@@ -13,6 +13,10 @@
 
 @implementation ZTResultObject
 
+- (NSError *) chechResult {
+    return nil;
+}
+
 @end
 
 @implementation ZTHttpResultHeaderObject

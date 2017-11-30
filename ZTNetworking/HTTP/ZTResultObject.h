@@ -39,7 +39,25 @@
 
 @interface ZTResultObject : ZTPObject
 
-@property (nonatomic , strong) ZTHttpResultHeaderObject *head;
+//业务code
+@property (nonatomic , strong , readwrite) NSString *code;
+
+//id
+@property (nonatomic , strong , readwrite) NSString *requestId;
+
+//
+@property (nonatomic , strong , readwrite) NSString *reqTime;
+
+//
+@property (nonatomic , strong , readwrite) NSString *resTime;
+
+//
+@property (nonatomic , strong , readwrite) NSString *remark;
+
+//
+@property (nonatomic , strong , readwrite) NSString *status;
+
+- (NSError *) chechResult;
 
 @end
 
