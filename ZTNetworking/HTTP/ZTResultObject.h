@@ -48,7 +48,7 @@
 #define DCM_Generic_Custom_Json_Result_Define(__name, __className) \
 \
 @interface ZTHttp_##__name##_JsonResult : ZTResultObject \
-@property (nonatomic, strong, readwrite) __className * businessObject; \
+@property (nonatomic, strong, readwrite) __className * result; \
 @end
 
 #define DCM_Generic_Custom_Json_Result_Implement(__name, __className) \
