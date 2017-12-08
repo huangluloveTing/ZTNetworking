@@ -11,6 +11,7 @@
 #import "ZTHttpConst.h"
 #import "ZTHttpRequest.h"
 #import "ZTResultObject.h"
+#import <AFURLRequestSerialization.h>
 
 #define REQUEST_SEP_TIME (3)
 
@@ -68,6 +69,8 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  @param timeOut timeOut
  */
 - (void)setRequestTimeout:(CGFloat)timeOut;
+
+- (void) setRequestSearializer:(nullable id<AFURLRequestSerialization>)requestSearializer;
 
 /**
  设置证书

@@ -44,6 +44,10 @@
     self.sessionManager.requestSerializer.timeoutInterval = timeOut;
 }
 
+- (void) setRequestSearializer:(id<AFURLRequestSerialization>)requestSearializer {
+    self.sessionManager.requestSerializer = requestSearializer;
+}
+
 - (void) setPinnedCertificates:(NSArray *)certificates {
     self.sessionManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate withPinnedCertificates:[[NSSet alloc] initWithObjects:certificates, nil]];
      // 客户端是否信任非法证书

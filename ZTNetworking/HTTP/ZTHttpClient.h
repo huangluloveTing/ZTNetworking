@@ -43,6 +43,16 @@ typedef void(^UploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedUni
 - (void) setPinnedCertificates:(nullable NSArray *)certificates;
 
 /**
+ 设置请求序列类
+ 如果请求为表单请求，则为 AFHTTPRequestSerializer 类型
+ 如果为 application/json 类型的请求，则为 AFJSONRequestSerializer
+ application/x-plist  AFPropertyListRequestSerializer
+
+ @param requestSearializer requestSearializer description
+ */
+- (void) setRequestSearializer:(id<AFURLRequestSerialization>)requestSearializer;
+
+/**
  设置超时时间
 
  @param timeOut 超时时间

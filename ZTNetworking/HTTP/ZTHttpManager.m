@@ -91,6 +91,10 @@ static ZTHttpManager *manager = nil;
     [_httpClient setRequestTimeOut:timeOut];
 }
 
+- (void) setRequestSearializer:(id<AFURLRequestSerialization>)requestSearializer {
+    [_httpClient setRequestSearializer:requestSearializer];
+}
+
 - (void) setPinnedCertificates:(NSArray *)certificates {
     [_httpClient setPinnedCertificates:certificates];
 }
