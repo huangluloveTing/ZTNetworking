@@ -16,4 +16,6 @@
 
 @property (nonatomic , strong) NSString *email;
 
+@property (nonatomic , strong) NSString *code;
+
 @end

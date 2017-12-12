@@ -21,15 +21,21 @@
 //根据 查询条件 查询对象
 - (id)   queryForEntity:(id<PZTObject>)entity
              queryValue:(NSString *)queryValue
-                 column:(NSString *)columnName;
+              fieldName:(NSString *)field;
 
 //查询所有的数据
 - (NSArray *)queryAllDataWithEntity:(id<PZTObject>)entity;
 
+//更新数据
+- (void) updateForEntity:(id<PZTObject>)entity
+              fieldValue:(NSString *)fieldValue
+               fieldName:(NSString *)fieldName
+             uniqueField:(NSString *)unique
+             uniqueValue:(NSString *)uniqueValue;
 //根据数据删除
 - (void) deleteForEntity:(id<PZTObject>)entity
-             columnValue:(NSString *)queryValue
-                  column:(NSString *)columnName;
+              fieldValue:(NSString *)fieldValue
+               fieldName:(NSString *)fieldName;
 
 @end
 
@@ -42,14 +48,20 @@
 //根据id 查询对象
 - (id)   queryForEntity:(id<PZTObject>)entity
              queryValue:(NSString *)queryValue
-                 column:(NSString *)columnName;
+                 fieldName:(NSString *)field;
 
 //查询所有的数据
 - (NSArray *)queryAllDataWithEntity:(id<PZTObject>)entity;
 
 - (void) deleteForEntity:(id<PZTObject>)entity
-             columnValue:(NSString *)queryValue
-                  column:(NSString *)columnName;
+              fieldValue:(NSString *)fieldValue
+               fieldName:(NSString *)fieldName;
+
+- (void) updateForEntity:(id<PZTObject>)entity
+              fieldValue:(NSString *)fieldValue
+               fieldName:(NSString *)fieldName
+             uniqueField:(NSString *)unique
+             uniqueValue:(NSString *)uniqueValue;
 
 @end
 

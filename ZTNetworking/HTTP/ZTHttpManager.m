@@ -352,7 +352,7 @@ static ZTHttpManager *manager = nil;
     @synchronized(_backUploadQueue) {
         [_backUploadQueue removeObjectForKey:ztRequest.identifier];
         [_backUploadRequestQueue removeObject:ztRequest];
-        [self.netCache deleteForEntity:ztRequest columnValue:ztRequest.identifier column:@"identifier"];
+        [self.netCache deleteForEntity:ztRequest fieldValue:ztRequest.identifier fieldName:@"identifier"];
     }
 }
 
@@ -360,7 +360,7 @@ static ZTHttpManager *manager = nil;
     @synchronized(_backRestQueue) {
         [_backRestQueue removeObjectForKey:ztRequest.identifier];
         [_backRestRequestQueue removeObject:ztRequest];
-        [self.netCache deleteForEntity:ztRequest columnValue:ztRequest.identifier column:@"identifier"];
+        [self.netCache deleteForEntity:ztRequest fieldValue:ztRequest.identifier fieldName:@"identifier"];
     }
 }
 
@@ -447,7 +447,7 @@ static ZTHttpManager *manager = nil;
         [_backUploadQueue removeObjectForKey:request.identifier];
         ZTHttpRequest *ztRequest = [ZTHttpRequest serializeWithJsonObject:[self.netCache queryForEntity:request
                                                                                              queryValue:request.identifier
-                                                                                                 column:@"identifier"][0]];
+                                                                                                 fieldName:@"identifier"][0]];
         NSURLSessionDataTask *task = [self perform_backUploadRequest:ztRequest
                                                                 Back:YES
                                                           Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
@@ -460,9 +460,7 @@ static ZTHttpManager *manager = nil;
 - (void) restartPostFailedQueuen:(ZTHttpRequest *)request {
     @synchronized(_backRestQueue) {
         [_backRestQueue removeObjectForKey:request.identifier];
-        ZTHttpRequest *ztRequest = [ZTHttpRequest serializeWithJsonObject:[self.netCache queryForEntity:request
-                                                                                             queryValue:request.identifier
-                                                                                                 column:@"identifier"][0]];
+        ZTHttpRequest *ztRequest = [ZTHttpRequest serializeWithJsonObject:[self.netCache queryForEntity:request queryValue:request.identifier fieldName:@"identifier"][0]];
         NSURLSessionDataTask *task = [self perform_back_post_request:ztRequest Back:YES Completion:nil];
         [_backRestQueue setValue:task forKey:request.identifier];
     }
@@ -483,7 +481,7 @@ static ZTHttpManager *manager = nil;
 - (NSURLSessionDataTask *) popSyncRestRequest:(ZTHttpRequest *)request {
     @synchronized(_restSyncQueues) {
         [_restSyncQueues removeObject:request];
-        [self.netCache deleteForEntity:request columnValue:request.identifier column:@"identifier"];
+        [self.netCache deleteForEntity:request fieldValue:request.identifier fieldName:@"identifier"];
     }
     return [self perform_sync_Rest_Request:[_restSyncQueues firstObject] Completion:nil];
 }
@@ -491,7 +489,7 @@ static ZTHttpManager *manager = nil;
 - (NSURLSessionDataTask *) putQueunRestStackBottomRequest:(ZTHttpRequest *)request {
     @synchronized(_restSyncQueues) {
         [_restSyncQueues removeObject:request];
-        [self.netCache deleteForEntity:request columnValue:request.identifier column:@"identifier"];
+        [self.netCache deleteForEntity:request fieldValue:request.identifier fieldName:@"identifier"];
         [_restSyncQueues addObject:request];
         [self.netCache saveData:request];
     }
@@ -550,7 +548,7 @@ static ZTHttpManager *manager = nil;
 - (NSURLSessionDataTask *) popSyncUploadRequest:(ZTHttpRequest *)request {
     @synchronized(_uploadSyncQueues) {
         [_uploadSyncQueues removeObject:request];
-        [self.netCache deleteForEntity:request columnValue:request.identifier column:@"identifier"];
+        [self.netCache deleteForEntity:request fieldValue:request.identifier fieldName:@"identifier"];
         NSString *filePath = [NSString stringWithFormat:@"%@/%@.tmp" , Save_File_Dir , request.identifier];
         NSFileManager *manager = [NSFileManager defaultManager];
         if ([manager fileExistsAtPath:filePath]) {
@@ -563,7 +561,7 @@ static ZTHttpManager *manager = nil;
 - (NSURLSessionDataTask *) putQueunUploadStackBottomRequest:(ZTHttpRequest *)request {
     @synchronized(_uploadSyncQueues) {
         [_uploadSyncQueues removeObject:request];
-        [self.netCache deleteForEntity:request columnValue:request.identifier column:@"identifier"];
+        [self.netCache deleteForEntity:request fieldValue:request.identifier fieldName:@"identifier"];
         [_uploadSyncQueues addObject:request];
         [self.netCache saveData:request];
     }

@@ -25,8 +25,8 @@
 }
 
 //根据id 查询对象
-- (id)   queryForEntity:(id<PZTObject>)entity queryValue:(NSString *)queryValue column:(NSString *)columnName {
-    return [self getCacheObject:entity queryNmae:queryValue ColumnName:columnName];
+- (id)   queryForEntity:(id<PZTObject>)entity queryValue:(NSString *)queryValue fieldName:(NSString *)field{
+    return [self getCacheObject:entity queryNmae:queryValue fieldName:field];
 }
 
 //查询所有的数据
@@ -121,10 +121,10 @@
 }
 
 - (id) getCacheObject:(id<PZTObject>)queryObject
-            queryNmae:(NSString *)queryKey
-           ColumnName:(NSString *)columnName{
+                queryNmae:(NSString *)queryKey
+                fieldName:(NSString *)fieldName{
     NSString *tableName = NSStringFromClass(queryObject.class);
-    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@=?;" , tableName , columnName];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@=?;" , tableName , fieldName];
     NSMutableArray *tempAr= [NSMutableArray array];
     [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
         if ([db open]) {
@@ -180,18 +180,18 @@
  根据字段名称删除 数据
 
  @param entity 对象
- @param queryValue 值
- @param columnName 字段名
+ @param fieldValue 值
+ @param fieldName 字段名
  */
-- (void) deleteForEntity:(id<PZTObject>)entity columnValue:(NSString *)queryValue column:(NSString *)columnName  {
+- (void) deleteForEntity:(id<PZTObject>)entity fieldValue:(NSString *)fieldValue fieldName:(NSString *)fieldName  {
     NSString *tableName = NSStringFromClass(entity.class);
-    NSString *sql = [NSString stringWithFormat:@"delete from %@ where %@ = ?" , tableName , columnName];
+    NSString *sql = [NSString stringWithFormat:@"delete from %@ where %@ = ?" , tableName , fieldName];
     [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
         if ([db open]) {
-            BOOL result = [db executeUpdate:sql , queryValue];
+            BOOL result = [db executeUpdate:sql , fieldValue];
             if (result) {
 #ifdef DEBUG
-                NSLog(@"删除数据 %@ 成功" , queryValue);
+                NSLog(@"删除数据 %@ 成功" , fieldValue);
 #endif
             }
         }
@@ -234,6 +234,26 @@
                 }
             }
         }
+    }];
+}
+
+- (void) updateForEntity:(id<PZTObject>)entity
+              fieldValue:(NSString *)fieldValue
+               fieldName:(NSString *)fieldName
+             uniqueField:(NSString *)unique
+             uniqueValue:(NSString *)uniqueValue{
+    NSString *tableName = NSStringFromClass(entity.class);
+    NSString *sql = [NSString stringWithFormat:@"update %@ set %@ = ? where %@ = ?" , tableName , fieldName , unique];
+    [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        if ([db open]) {
+            BOOL result = [db executeUpdate:sql , fieldValue , uniqueValue];
+            if (result) {
+#ifdef DEBUG
+                NSLog(@"更新数据 %@ 成功" , fieldValue);
+#endif
+            }
+        }
+        [db close];
     }];
 }
 

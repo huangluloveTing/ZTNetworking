@@ -44,72 +44,33 @@ static NSString *const QCloud_Bucket_Name = @"yanghesfa";
     st.name = @"hl";
     st.hobby = @"haha";
     st.email = @"1234";
+    
+    Student *st_1 = [[Student alloc] init];
+    st_1.name = @"h---l";
+    st_1.hobby = @"haha";
+    st_1.email = @"1234";
+    
+    Student *st_2 = [[Student alloc] init];
+    st_2.name = @"h-l";
+    st_2.hobby = @"haha";
+    st_2.email = @"1234";
+    st_2.code = @"code";
 
     [cache saveData:st];
+    [cache saveData:st_1];
+    [cache saveData:st_2];
+    [cache saveData:st_1];
+    [cache saveData:st_2];
+    [cache saveData:st_1];
+    [cache saveData:st_2];
+    
+    [cache updateForEntity:st fieldValue:@"email_10" fieldName:@"email" uniqueField:@"code" uniqueValue:@"code"];
 //
    NSArray *rresults = [cache queryAllDataWithEntity:st];
 //
     for (NSDictionary *s  in rresults) {
         NSLog(@" re = %@ " , s);
     }
-    
-//
-//    Student *su = [Student serializeWithJsonObject:rresults.firstObject];
-//    NSLog(@"su Id = %@" , su.Id);;
-//
-//    NSArray *data = [cache queryForEntity:st queryValue:@"huanglu" column:@"name"];
-//
-//    for (NSDictionary *sss in data) {
-//        Student *sudent = [Student serializeWithJsonObject:sss];
-//        NSLog(@"Id = %@" , sudent.Id);
-//    }
-//
-//    NSDictionary * parameters = @{
-//                                  @"appType" : @"IOS",
-//                                  @"appVersion" : @"15",
-//                                  @"businessId" : @"J000183T16063412017-10-20",
-//                                  @"imei" : @"F850C2F8-BF1B-49E2-B4E3-0B5E232E9139",
-//                                  @"imgType" : @"30",
-//                                  @"imgedate" : @"2017-10-20",
-//                                  @"phoneSend" : @"1",
-//                                  @"photoName" : @"J000183_1508480076128.jpg",
-//                                  @"psTime" : @"2017-10-20 14:14:39",
-//                                  @"subFlag" : @"offline",
-//                                  @"uaccount" : @"5071772D86FF68ECE053870AA8C0B393"
-//                                  };
-//    loginPIController.do?checkUser
-//    self.dataTask2 = [[ZTHttpManager sharedManager] perform_BackNormalRequest_URI:@"loginPIController.do?changeTmPassword" Parameters:parameters Headers:nil Asynac:NO Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
-//
-//    }];
-//    self.dataTask = [[ZTHttpManager sharedManager] perform_BackNormalRequest_URI:@"loginPIController.do?checkUser" Parameters:parameters Headers:nil Asynac:NO Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
-//
-//    }];
-    
-    
-//    [[ZTHttpManager sharedManager] restartAllOfflineQueue];
-    
-   
-    UIImage *image = [UIImage imageNamed:@"tp"];
-    NSData *data = UIImagePNGRepresentation(image);
-    if (!data) {
-        data = UIImageJPEGRepresentation(image, 1);
-    }
-    
-    [[ZTHttpManager sharedManager] setNormalHost:@"" UploadHost:@"" ICloudBuketHost:[NSString stringWithFormat:@"%@", QCloundIP]];
-    [[ZTHttpManager sharedManager] setQinyun_Access_key_id:QCloud_Access_key_Id SecretKey:QCloud_Secret_Access_key];
-    
-//    self.dataTask = [[ZTHttpManager sharedManager] perform_BackUploadRequest_URI:@""
-//                                                                        TaskName:@"upload"
-//                                                                      Parameters:parameters
-//                                                                         Headers:nil
-//                                                                            Name:@"name"
-//                                                                        FileName:@"fileName"
-//                                                                          Binary:data
-//                                                                          Asynac:YES
-//                                                                        Progress:nil
-//                                                                      Completion:^(id  _Nullable retObject, NSError * _Nullable error) {
-//
-//    }];
 }
 
 
