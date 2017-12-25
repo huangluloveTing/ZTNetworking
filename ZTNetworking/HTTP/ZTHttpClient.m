@@ -60,6 +60,12 @@
                                        Parameters:(NSDictionary *)parameters
                                           Headers:(NSDictionary *)headers
                                        Completion:(NormalRequestCompletion)completion {
+    
+    AFHTTPRequestSerializer *requestSerializer = [self.sessionManager requestSerializer];
+    [headers enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [requestSerializer setValue:obj forHTTPHeaderField:key];
+    }];
+    
     return [self.sessionManager GET:url
                          parameters:parameters
                            progress:nil
@@ -83,6 +89,11 @@
                                            Headers:(nullable NSDictionary *)headers
                                         Completion:(nullable NormalRequestCompletion) completion{
 
+    AFHTTPRequestSerializer *requestSerializer = [self.sessionManager requestSerializer];
+    [headers enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [requestSerializer setValue:obj forHTTPHeaderField:key];
+    }];
+    
     return  [self.sessionManager POST:url
                            parameters:parameters
                              progress:nil

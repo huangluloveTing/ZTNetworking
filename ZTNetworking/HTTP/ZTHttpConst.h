@@ -15,10 +15,42 @@ static NSString * const ZT_Http_Update_Code = @"101";   //监测版本的code
 
 static NSString * const ZT_Http_Failed_Description = @"请求数据失败";
 
-#define ZTWeakify(A) \
-__weak typeof(A) weak##A = A;
+// 避免宏循环引用
+#ifndef LLWeakObj
+#if DEBUG
+#if __has_feature(objc_arc)
+#define LLWeakObj(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
+#else
+#define LLWeakObj(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define LLWeakObj(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
+#else
+#define LLWeakObj(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
+#endif
+#endif
+#endif
 
-#define ZTStrongify(A) \
-__strong typeof(weak##A) A = weak##A;
+#ifndef LLStrongObj
+#if DEBUG
+#if __has_feature(objc_arc)
+#define LLStrongObj(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
+#else
+#define LLStrongObj(object) autoreleasepool{} __typeof__(object) object = block##_##object;
+#endif
+#else
+#if __has_feature(objc_arc)
+#define LLStrongObj(object) try{} @finally{} __typeof__(object) object = weak##_##object;
+#else
+#define LLStrongObj(object) try{} @finally{} __typeof__(object) object = block##_##object;
+#endif
+#endif
+#endif
+
+#define ZTWeakify(A) @LLWeakObj(A)
+
+#define ZTStrongify(A) @LLStrongObj(A)
 
 #endif /* ZTHttpConst_h */
+
