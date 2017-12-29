@@ -186,7 +186,8 @@
                     NSString *value = [set stringForColumn:column];
                     [dic setValue:value forKey:column];
                 }
-                [tempAr addObject:dic];
+                ZTPObject *object = [[[entity class] alloc] initWithJsonObject:dic];
+                [tempAr addObject:object];
             }
         }
         
