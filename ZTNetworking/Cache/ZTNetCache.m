@@ -24,6 +24,10 @@
     [self createTableName:data];
 }
 
+- (void) deleteAllForClass:(Class)class {
+    [self deleteTableWithName:NSStringFromClass(class)];
+}
+
 //根据id 查询对象
 - (id)   queryForEntity:(id<PZTObject>)entity queryValue:(NSString *)queryValue fieldName:(NSString *)field{
     return [self getCacheObject:entity queryNmae:queryValue fieldName:field];
@@ -63,6 +67,23 @@
     
     [self confirmTableColumnWith:queryObject];
     [self saveDataToTable:queryObject];
+}
+
+- (void) deleteTableWithName:(NSString *)tableName {
+    
+    __block NSString *sql = [NSString stringWithFormat:@"DROP TABLE  %@;" , tableName];
+    
+    [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        if ([db open]) {
+            BOOL result =  [db executeUpdate:sql];
+            if (result) {
+#if DEBUG
+                NSLog(@"删除表 %@ 成功" , tableName);
+#endif
+            }
+        }
+        [db close];
+    }];
 }
 
 

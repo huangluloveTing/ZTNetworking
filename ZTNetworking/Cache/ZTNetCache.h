@@ -23,6 +23,8 @@
              queryValue:(NSString *)queryValue
               fieldName:(NSString *)field;
 
+- (void) deleteAllForClass:(Class)class;
+
 //查询所有的数据
 - (NSArray *)queryAllDataWithEntity:(id<PZTObject>)entity;
 
@@ -49,6 +51,8 @@
 - (id)   queryForEntity:(id<PZTObject>)entity
              queryValue:(NSString *)queryValue
                  fieldName:(NSString *)field;
+
+- (void) deleteAllForClass:(Class)class;
 
 //查询所有的数据
 - (NSArray *)queryAllDataWithEntity:(id<PZTObject>)entity;

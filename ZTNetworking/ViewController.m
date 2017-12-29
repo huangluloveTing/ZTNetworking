@@ -41,32 +41,34 @@ static NSString *const QCloud_Bucket_Name = @"yanghesfa";
     [super viewDidLoad];
     ZTNetCache *cache = [[ZTNetCache alloc] init];
     Student *st = [[Student alloc] init];
-    st.name = @"hl";
-    st.hobby = @"haha";
-    st.email = @"1234";
-    
-    Student *st_1 = [[Student alloc] init];
-    st_1.name = @"h---l";
-    st_1.hobby = @"haha";
-    st_1.email = @"1234";
-    
-    Student *st_2 = [[Student alloc] init];
-    st_2.name = @"h-l";
-    st_2.hobby = @"haha";
-    st_2.email = @"1234";
-    st_2.code = @"code";
-
-    [cache saveData:st];
-    [cache saveData:st_1];
-    [cache saveData:st_2];
-    [cache saveData:st_1];
-    [cache saveData:st_2];
-    [cache saveData:st_1];
-    [cache saveData:st_2];
-    
-    [cache updateForEntity:st fieldValue:@"email_10" fieldName:@"email" uniqueField:@"code" uniqueValue:@"code"];
+//    st.name = @"hl";
+//    st.hobby = @"haha";
+//    st.email = @"1234";
 //
-   NSArray *rresults = [cache queryAllDataWithEntity:st];
+//    Student *st_1 = [[Student alloc] init];
+//    st_1.name = @"h---l";
+//    st_1.hobby = @"haha";
+//    st_1.email = @"1234";
+//
+//    Student *st_2 = [[Student alloc] init];
+//    st_2.name = @"h-l";
+//    st_2.hobby = @"haha";
+//    st_2.email = @"1234";
+//    st_2.code = @"code";
+//
+//    [cache saveData:st];
+//    [cache saveData:st_1];
+//    [cache saveData:st_2];
+//    [cache saveData:st_1];
+//    [cache saveData:st_2];
+//    [cache saveData:st_1];
+//    [cache saveData:st_2];
+//
+//    [cache updateForEntity:st fieldValue:@"email_10" fieldName:@"email" uniqueField:@"code" uniqueValue:@"code"];
+//
+    
+    [cache deleteAllForClass:st.class];
+    NSArray *rresults = [cache queryAllDataWithEntity:st];
 //
     for (NSDictionary *s  in rresults) {
         NSLog(@" re = %@ " , s);
