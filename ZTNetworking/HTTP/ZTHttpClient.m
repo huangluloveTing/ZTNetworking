@@ -57,7 +57,7 @@
 }
 
 - (NSURLSessionDataTask *) perfrom_normal_get_URL:(NSString *)url
-                                       Parameters:(NSDictionary *)parameters
+                                       Parameters:(id)parameters
                                           Headers:(NSDictionary *)headers
                                        Completion:(NormalRequestCompletion)completion {
     
@@ -85,7 +85,7 @@
 }
 
 - (NSURLSessionDataTask *) perfrom_normal_post_URL:(NSString *)url
-                                        Parameters:(NSDictionary *)parameters
+                                        Parameters:(id)parameters
                                            Headers:(nullable NSDictionary *)headers
                                         Completion:(nullable NormalRequestCompletion) completion{
 

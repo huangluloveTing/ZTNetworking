@@ -139,7 +139,7 @@ static ZTHttpManager *manager = nil;
 }
 
 - (NSURLSessionDataTask *) perform_GetRequest_URI:(NSString *)uri
-                                       Parameters:(NSDictionary *)parameters
+                                       Parameters:(id)parameters
                                           Headers:(NSDictionary *)headers
                                        Completion:(ZTNormalRequestCompletion)completion {
     
@@ -152,7 +152,7 @@ static ZTHttpManager *manager = nil;
 }
 
 - (NSURLSessionDataTask *) perform_PostRequest_URI:(NSString *)uri
-                                        Parameters:(NSDictionary *)parameters
+                                        Parameters:(id)parameters
                                            Headers:(nullable NSDictionary *)headers
                                         Completion:(ZTNormalRequestCompletion)completion {
     
@@ -162,7 +162,7 @@ static ZTHttpManager *manager = nil;
 }
 
 - (NSURLSessionDataTask *) perform_postRequest_URL:(NSString *)url
-                                        Parameters:(NSDictionary *)parameters
+                                        Parameters:(id)parameters
                                            Headers:(nullable NSDictionary *)headers
                                         Completion:(ZTNormalRequestCompletion)completion {
     return [_httpClient perfrom_normal_post_URL:url
@@ -182,7 +182,7 @@ static ZTHttpManager *manager = nil;
 }
 
 - (NSURLSessionDataTask *) perform_UploadRequest_URI:(NSString *)uri
-                                          Parameters:(NSDictionary *)parameters
+                                          Parameters:(id)parameters
                                              Headers:(NSDictionary *)headers
                                                 Name:(nonnull NSString *) name
                                             FileName:(nonnull NSString *)fileName
@@ -201,7 +201,7 @@ static ZTHttpManager *manager = nil;
 }
 
 - (NSURLSessionDataTask *) perform_uploadRequest_URL:(NSString *)url
-                                          Parameters:(NSDictionary *)parameters
+                                          Parameters:(id)parameters
                                              Headers:(NSDictionary *)headers
                                                 Name:(nonnull NSString *) name
                                             FileName:(nonnull NSString *)fileName
@@ -229,8 +229,8 @@ static ZTHttpManager *manager = nil;
 }
 
 - (NSURLSessionDataTask *) perform_BackUploadRequest_URI:(NSString *)uri
-                                                TaskName:(nullable NSString *)taskName
-                                              Parameters:(nullable NSDictionary *)parameters
+                                                TaskName:(NSString *)taskName
+                                              Parameters:(id)parameters
                                                  Headers:(NSDictionary *)headers
                                                     Name:(NSString *)name
                                                 FileName:(NSString *)fileName
@@ -269,7 +269,7 @@ static ZTHttpManager *manager = nil;
 
 - (NSURLSessionDataTask *) perform_BackNormalRequest_URI:(NSString *)uri
                                                 TaskName:(nullable NSString *)taskName 
-                                              Parameters:(nullable NSDictionary *)parameters
+                                              Parameters:(id)parameters
                                                  Headers:(NSDictionary *)headers
                                                   Asynac:(BOOL)asynac
                                               Completion:(ZTNormalRequestCompletion)completion {

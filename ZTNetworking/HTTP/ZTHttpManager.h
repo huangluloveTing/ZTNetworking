@@ -117,7 +117,7 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  @return return value description
  */
 - (nullable NSURLSessionDataTask *) perform_GetRequest_URI:(nonnull NSString *)uri
-                                                Parameters:(nullable NSDictionary *) parameters
+                                                Parameters:(nullable id) parameters
                                                    Headers:(nullable NSDictionary *) headers
                                                 Completion:(nullable ZTNormalRequestCompletion)completion;
 
@@ -131,7 +131,7 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  @return return
  */
 - (nullable NSURLSessionDataTask *) perform_PostRequest_URI:(nonnull NSString *)uri
-                                                 Parameters:(nullable NSDictionary *)parameters
+                                                 Parameters:(nullable id)parameters
                                                     Headers:(nullable NSDictionary *)headers
                                                  Completion:(nullable ZTNormalRequestCompletion)completion;
 
@@ -148,7 +148,7 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  @return return
  */
 - (nullable NSURLSessionDataTask *) perform_UploadRequest_URI:(nonnull NSString *)uri
-                                                   Parameters:(nullable NSDictionary *)parameters
+                                                   Parameters:(nullable id)parameters
                                                       Headers:(nullable NSDictionary *)headers
                                                          Name:(nonnull NSString *) name
                                                      FileName:(nonnull NSString *)fileName
@@ -168,7 +168,7 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  */
 - (nullable NSURLSessionDataTask *) perform_BackNormalRequest_URI:(nonnull NSString *)uri
                                                          TaskName:(nullable NSString *)taskName
-                                                       Parameters:(nullable NSDictionary *)parameters
+                                                       Parameters:(nullable id)parameters
                                                           Headers:(nullable NSDictionary *)headers
                                                            Asynac:(BOOL)asynac
                                                        Completion:(nullable ZTNormalRequestCompletion)completion;
@@ -190,7 +190,7 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  */
 - (nullable NSURLSessionDataTask *) perform_BackUploadRequest_URI:(nonnull NSString *) uri
                                                          TaskName:(nullable NSString *)taskName
-                                                       Parameters:(nullable NSDictionary *)parameters
+                                                       Parameters:(nullable id)parameters
                                                           Headers:(nullable NSDictionary *)headers
                                                              Name:(nonnull NSString *) name
                                                          FileName:(nonnull NSString *)fileName

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ZTNetworking"
-  s.version      = "1.2.8"
+  s.version      = "1.2.9"
   s.summary      = "一个基于AF 的网络框架"
 
   s.homepage     = "https://github.com/huangluloveTing/ZTNetworking.git"

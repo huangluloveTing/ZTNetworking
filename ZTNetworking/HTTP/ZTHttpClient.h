@@ -60,12 +60,12 @@ typedef void(^UploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedUni
 - (void) setRequestTimeOut:(CGFloat)timeOut;
 
 - (nullable NSURLSessionDataTask *)perfrom_normal_get_URL:(nonnull NSString *)url
-                                               Parameters:(nullable NSDictionary *)parameters
+                                               Parameters:(nullable id)parameters
                                                   Headers:(nullable NSDictionary *)headers
                                                Completion:(nullable NormalRequestCompletion)completion;
 
 - (nullable NSURLSessionDataTask *) perfrom_normal_post_URL:(nonnull NSString *)url
-                                                 Parameters:(nonnull NSDictionary *)parameters
+                                                 Parameters:(nonnull id)parameters
                                                     Headers:(nullable NSDictionary *)headers
                                                  Completion:(nullable NormalRequestCompletion) completion;
 
