@@ -143,7 +143,12 @@ static ZTHttpManager *manager = nil;
                                           Headers:(NSDictionary *)headers
                                        Completion:(ZTNormalRequestCompletion)completion {
     
-    NSString *url = [NSString stringWithFormat:@"%@%@" , self.normalHost , uri];
+//    NSString *url = [NSString stringWithFormat:@"%@%@" , self.normalHost , uri]; `
+    NSString *url = @"";
+    if (self.interceptor) {
+        url = [self.interceptor normalIPForAppManager:self];
+    }
+    url = [NSString stringWithFormat:@"%@%@" , url , uri];
     
     return [_httpClient perfrom_normal_get_URL:url
                                     Parameters:parameters
@@ -156,7 +161,11 @@ static ZTHttpManager *manager = nil;
                                            Headers:(nullable NSDictionary *)headers
                                         Completion:(ZTNormalRequestCompletion)completion {
     
-    NSString *url = [NSString stringWithFormat:@"%@%@" , self.normalHost , uri];
+    NSString *url = @"";
+    if (self.interceptor) {
+        url = [self.interceptor normalIPForAppManager:self];
+    }
+    url = [NSString stringWithFormat:@"%@%@" , url , uri];
     
     return [self perform_postRequest_URL:url Parameters:parameters Headers:headers Completion:completion];
 }
@@ -189,7 +198,11 @@ static ZTHttpManager *manager = nil;
                                               Binary:(nonnull NSData *)binary
                                             Progress:(nullable ZTUploadProgressBlock)progress
                                           Completion:(ZTUploadRequestCompletion)completion {
-    NSString *url = [NSString stringWithFormat:@"%@%@" , self.uploadHost , uri];
+    NSString *url = @"";
+    if (self.interceptor) {
+        url = [self.interceptor uploadIPForAppManager:self];
+    }
+    url = [NSString stringWithFormat:@"%@%@" , url , uri];
     return [self perform_uploadRequest_URL:url
                                 Parameters:parameters
                                    Headers:headers
@@ -239,7 +252,11 @@ static ZTHttpManager *manager = nil;
                                                 Progress:(nullable ZTUploadProgressBlock)progress
                                               Completion:(ZTUploadRequestCompletion)completion {
     
-    NSString *url = [NSString stringWithFormat:@"%@%@" , self.uploadHost , uri];
+    NSString *url = @"";
+    if (self.interceptor) {
+        url = [self.interceptor uploadIPForAppManager:self];
+    }
+    url = [NSString stringWithFormat:@"%@%@" , url , uri];
     ZTHttpRequest *ztRequest = [[ZTHttpRequest alloc] init];
     ztRequest.parameters = parameters;
     ztRequest.identifier = [NSString stringWithFormat:@"%.f",[NSDate date].timeIntervalSince1970 * 1000];
@@ -274,7 +291,11 @@ static ZTHttpManager *manager = nil;
                                                   Asynac:(BOOL)asynac
                                               Completion:(ZTNormalRequestCompletion)completion {
     
-    NSString *url = [NSString stringWithFormat:@"%@%@" , self.normalHost , uri];
+    NSString *url = @"";
+    if (self.interceptor) {
+        url = [self.interceptor normalIPForAppManager:self];
+    }
+    url = [NSString stringWithFormat:@"%@%@" , url , uri];
     ZTHttpRequest *ztRequest = [[ZTHttpRequest alloc] init];
     ztRequest.parameters = parameters;
     ztRequest.identifier = [NSString stringWithFormat:@"%.f",[NSDate date].timeIntervalSince1970 * 1000];

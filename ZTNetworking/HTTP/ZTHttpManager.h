@@ -15,6 +15,35 @@
 
 #define REQUEST_SEP_TIME (3)
 
+@class ZTHttpManager;
+
+@protocol ZTHttpManagerInterceptor <NSObject>
+
+- (NSString *_Nullable) normalIPForAppManager:(nullable ZTHttpManager *)coreManager;
+
+- (NSString *_Nullable) uploadIPForAppManager:(nullable ZTHttpManager *)coreManager;
+
+- (NSString *_Nullable) icloudIPForAppManager:(nullable ZTHttpManager *)coreManager;
+
+@end
+
+@protocol ZTHttpManagerResponseInterceptor <NSObject>
+
+@optional
+- (nullable id) requestManager:(nullable ZTHttpManager *)manager handlerResponse:(ZTResultObject *_Nullable)result;
+
+@end
+
+@protocol ZTHttpManagerRequestInterceptor <NSObject>
+
+@optional
+- (nullable NSURLRequest *) requestManager:(nullable ZTHttpManager *)manager request:(nullable NSURLRequest *)request;
+
+- (nullable id) requestManager:(nullable ZTHttpManager *)manager paramter:(nullable id)parameter;
+
+- (nullable NSDictionary *) requestManager:(nullable ZTHttpManager *)manager header:(nullable NSDictionary *)header;
+
+@end
 
 
 typedef void(^ZTNormalRequestCompletion)(_Nullable id retObject ,  NSError * _Nullable error);
@@ -39,6 +68,12 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
 
 @property (nonatomic , copy , nullable) ZTUploadProgressBlock progressBlock;
 
+@property (nonatomic , weak , nullable) id <ZTHttpManagerInterceptor> interceptor;
+
+@property (nonatomic , weak , nullable) id <ZTHttpManagerResponseInterceptor> responseHandler;
+
+@property (nonatomic , weak , nullable) id <ZTHttpManagerRequestInterceptor> requestHandler;
+
 + (nonnull instancetype) sharedManager;
 
 
@@ -49,9 +84,9 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
  @param uploadHost 上传的ip
  @param icloudHost 云服务的ip地址
  */
-- (void) setNormalHost:(nonnull NSString *)normalHost
-            UploadHost:(nonnull NSString *)uploadHost
-       ICloudBuketHost:(nullable NSString *)icloudHost;
+//- (void) setNormalHost:(nonnull NSString *)normalHost
+//            UploadHost:(nonnull NSString *)uploadHost
+//       ICloudBuketHost:(nullable NSString *)icloudHost;
 
 
 /**
