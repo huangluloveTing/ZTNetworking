@@ -10,56 +10,77 @@
 #import "ZTPObject.h"
 
 @protocol ZTResultObject <NSObject>
-
-@end
+    
+    @end
 
 @interface ZTHttpResultHeaderObject : ZTPObject
-
-//业务code
-@property (nonatomic , strong , readwrite) NSString *code;
-
-//id
-@property (nonatomic , strong , readwrite) NSString *requestId;
-
-//
-@property (nonatomic , strong , readwrite) NSString *reqTime;
-
-//
-@property (nonatomic , strong , readwrite) NSString *resTime;
-
-//
-@property (nonatomic , strong , readwrite) NSString *remark;
-
-//
-@property (nonatomic , strong , readwrite) NSString *status;
-
+    
+    //业务code
+    @property (nonatomic , strong , readwrite) NSString *code;
+    
+    //id
+    @property (nonatomic , strong , readwrite) NSString *requestId;
+    
+    //
+    @property (nonatomic , strong , readwrite) NSString *reqTime;
+    
+    //
+    @property (nonatomic , strong , readwrite) NSString *resTime;
+    
+    //
+    @property (nonatomic , strong , readwrite) NSString *remark;
+    
+    //
+    @property (nonatomic , strong , readwrite) NSString *status;
+    
 - (NSError *) chechResult;
+    
+    @end;
 
-@end;
+
+@interface ZTIOSParamObject : ZTPObject
+    
+    @property (nonatomic , strong , readwrite) NSString *currentVersion;
+    
+    @property (nonatomic , strong , readwrite) NSString *updateUrl;
+    
+    @property (nonatomic , strong , readwrite) NSString *desc;
+    
+    @property (nonatomic , strong , readwrite) NSString *forceUpdate;
+    
+    @end
+
+@interface ZTParamResult : ZTPObject
+    
+    @property (nonatomic , strong , readwrite) ZTIOSParamObject *ios;
+    
+    @end
 
 @interface ZTResultObject : ZTPObject
-
-//业务code
-@property (nonatomic , strong , readwrite) NSString *code;
-
-//id
-@property (nonatomic , strong , readwrite) NSString *requestId;
-
-//
-@property (nonatomic , strong , readwrite) NSString *reqTime;
-
-//
-@property (nonatomic , strong , readwrite) NSString *resTime;
-
-//
-@property (nonatomic , strong , readwrite) NSString *remark;
-
-//
-@property (nonatomic , strong , readwrite) NSString *status;
-
+    
+    //业务code
+    @property (nonatomic , strong , readwrite) NSString *code;
+    
+    //id
+    @property (nonatomic , strong , readwrite) NSString *requestId;
+    
+    //
+    @property (nonatomic , strong , readwrite) NSString *reqTime;
+    
+    //
+    @property (nonatomic , strong , readwrite) NSString *resTime;
+    
+    //
+    @property (nonatomic , strong , readwrite) NSString *remark;
+    
+    //
+    @property (nonatomic , strong , readwrite) NSString *status;
+    
+    @property (nonatomic , strong , readwrite) ZTParamResult *params;
+    
 - (NSError *) chechResult;
-
-@end
+    
+    @end
 
 #define ZTHttpResultObject(__name) ZTHttp_##__name##_JsonResult
 

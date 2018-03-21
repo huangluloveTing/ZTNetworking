@@ -49,7 +49,7 @@
 }
 
 - (void) setPinnedCertificates:(NSArray *)certificates {
-    self.sessionManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate withPinnedCertificates:[[NSSet alloc] initWithObjects:certificates, nil]];
+    self.sessionManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate withPinnedCertificates:[[NSSet alloc] initWithArray:certificates]];
      // 客户端是否信任非法证书
     self.sessionManager.securityPolicy.allowInvalidCertificates = YES;
     // 是否在证书域字段中验证域名

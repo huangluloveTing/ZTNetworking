@@ -12,15 +12,15 @@
 
 
 @implementation ZTResultObject
-
+    
 - (NSError *) chechResult {
     return nil;
 }
-
-@end
+    
+    @end
 
 @implementation ZTHttpResultHeaderObject
-
+    
 - (NSError *) chechResult {
     if (self.status.integerValue == ZT_Http_Success_Code.integerValue) {
         return nil;
@@ -34,10 +34,22 @@
     
     return error;
 }
+    
+    @end
 
-@end
+@implementation ZTIOSParamObject
+    
+    @end
+
+@implementation ZTParamResult
+    
+    @end
+
+
+
 
 DCM_Generic_Custom_Json_Result_Implement(Dictionary, NSDictionary)
 DCM_Generic_Custom_Json_Result_Implement(Array, NSArray)
 DCM_Generic_Custom_Json_Result_Implement(String, NSString)
 DCM_Generic_Custom_Json_Result_Implement(Number, NSNumber)
+
