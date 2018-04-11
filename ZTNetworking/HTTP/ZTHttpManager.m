@@ -78,6 +78,31 @@ static ZTHttpManager *manager = nil;
     return manager;
 }
 
+
++ (instancetype) sharedManagerWithBaseUrl:(NSString *)url {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (! manager) {
+            
+            manager = [[ZTHttpManager alloc] init];
+            manager.httpClient = [[ZTHttpClient alloc] initWithBaseUrl:url];
+            [manager.httpClient setRequestTimeOut:40];
+            manager.netCache = [[ZTNetCache alloc] init];
+            manager.netCache = [[ZTNetCache alloc] init];
+            manager.backUploadQueue = [NSMutableDictionary dictionary];
+            manager.backRestQueue = [NSMutableDictionary dictionary];
+            manager.backRestRequestQueue = [NSMutableArray array];
+            manager.backUploadRequestQueue = [NSMutableArray array];
+            manager.restSyncQueues = [NSMutableArray array];
+            manager.uploadSyncQueues = [NSMutableArray array];
+            manager.rest_sema_t = dispatch_semaphore_create(1);
+            manager.upload_sema_t = dispatch_semaphore_create(1);
+            [manager initQueue];
+        }
+    });
+    
+    return manager;
+}
 - (void) setNormalHost:(NSString *)normalHost
             UploadHost:(NSString *)uploadHost
        ICloudBuketHost:(nullable NSString *)icloudHost{

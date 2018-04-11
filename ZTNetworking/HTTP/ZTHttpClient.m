@@ -35,7 +35,19 @@
     
     return self;
 }
-
+- (instancetype) initWithBaseUrl:(NSString *)url {
+    if (self = [super init]) {
+        self.sessionManager = [[AFHTTPSessionManager alloc]initWithBaseURL:[NSURL URLWithString:url]];
+        self.sessionManager.requestSerializer = [[AFHTTPRequestSerializer alloc] init];
+        self.sessionManager.requestSerializer.timeoutInterval = 30.0f;
+        AFHTTPResponseSerializer *serializer = [[AFHTTPResponseSerializer alloc] init];
+        serializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html",@"text/xml",@"text/json", @"text/javascript", nil];
+        self.sessionManager.responseSerializer = serializer;
+        self.qnUploadManager = [[QNUploadManager alloc] init];
+    }
+    
+    return self;
+}
 - (void) setRequestTimeOut:(CGFloat)timeOut {
     if (timeOut <= 0) {
         timeOut = 30.0f;

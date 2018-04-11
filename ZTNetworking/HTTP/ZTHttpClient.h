@@ -34,6 +34,13 @@ typedef void(^UploadProgressBlock)(CGFloat totalUnitCount , CGFloat completedUni
 //                                UploadHost:(nullable NSString *)uploadHost
 //                                IcloudHost:(nullable NSString *)icloudHost;
 
+/**
+ 带URL初始化 (AFNetWorking3.2 使用)
+
+ @param url baseUrl
+ @return instancetype
+ */
+- (nullable instancetype) initWithBaseUrl:(nullable NSString *)url;
 
 /**
  https 网络请求， 设置ssl 证书

@@ -76,6 +76,13 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
 
 + (nonnull instancetype) sharedManager;
 
+/**
+ 带URL初始化 (AFNetWorking3.2 使用)
+ 
+ @param url baseUrl
+ @return instancetype
+ */
++ (nonnull instancetype) sharedManagerWithBaseUrl:(nonnull NSString *)url;
 
 /**
  设置请求的Ip地址
