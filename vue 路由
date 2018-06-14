@@ -1,0 +1,32 @@
+vue 路由
+
+	1、先下载vue-router插件
+		npm install vue-router 或者 yarn add vue-router
+	2、使用vue-router插件
+		import Vue from 'vue'
+		import VueRouter from 'vue-router'
+		Vue.use(VueRouter)
+	3、配置路由的页面
+		// 定义路由组件
+		var routes = [
+		    {
+		        path:"/one",
+
+		        component:Component_A
+		    },
+		    {
+		        path:"/two",
+		        component:Component_B
+		    },
+		];
+		
+		// 定义路由
+		var router = new VueRouter({
+		    routes
+		});
+
+		// 创建和挂载实例
+		new Vue({
+		    el:"#box",
+		    router
+		});

@@ -9,10 +9,10 @@
 #import "ViewController.h"
 #import "ZTNetWorking.h"
 #import "Student.h"
-
+#import "ZTPObject.h"
 
 #ifdef DEBUG
-static NSString *const QCloundIP = @"http://ozsymqi0d.bkt.clouddn.com/";
+static NSString *const QCloundIP = @"http://jsonplaceholder.typicode.com/posts";
 static NSString *const QCloud_Access_key_Id = @"c7JN1kstps9ZQ61NnqgBA2tK5orSA9SlIWr5q7rt";
 static NSString *const QCloud_Secret_Access_key = @"WlKpyUStQkqRHcxScciHHqwYkQGrV38UcV8UjjzT";
 static NSString *const QCloud_Bucket_Name = @"demo";
@@ -25,7 +25,38 @@ static NSString *const QCloud_Secret_Access_key = @"KiR0383h1SZuwtpFUh1iEd96JRgs
 static NSString *const QCloud_Bucket_Name = @"yanghesfa";
 
 #endif
+@interface MyObject:ZTPObject
 
+@property (nonatomic , strong) NSString *userId;
+@property(nonatomic , strong) NSString *ID;
+@property (nonatomic , strong) NSString *title;
+@property (nonatomic ,strong) NSString *body;
+
+@property (nonatomic , strong) MyObject *sub;
+
+@end
+
+@implementation MyObject
+
++ (NSDictionary *) mapProperties {
+    return @{
+             @"ID" : @"id"
+             };
+}
+
+@end
+DP_Generic_Custom_Array_Class_Define(MyObject)
+
+
+@interface MyObjects:ZTPObject
+
+@property (nonatomic , strong) DPMObjectArray(MyObject) *results;
+
+@end
+
+@implementation MyObjects
+
+@end
 
 @interface ViewController ()
 
@@ -35,44 +66,15 @@ static NSString *const QCloud_Bucket_Name = @"yanghesfa";
 
 @end
 
+NSString *josn = @"{\"results\":[{\"userId\": 1,\"id\": 1,\"title\": \"sunt aut fact\",\"body\": \"quicto\",\"sub\":{\"userId\": 1,\"id\": 1,\"title\": \"sunt aut fact\",\"body\": \"quicto\"}},{\"userId\": 1,\"id\": 2,\"title\": \"qui est esse\",\"body\": \"est rella\"}]}";
+
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    ZTNetCache *cache = [[ZTNetCache alloc] init];
-    Student *st = [[Student alloc] init];
-//    st.name = @"hl";
-//    st.hobby = @"haha";
-//    st.email = @"1234";
-//
-//    Student *st_1 = [[Student alloc] init];
-//    st_1.name = @"h---l";
-//    st_1.hobby = @"haha";
-//    st_1.email = @"1234";
-//
-//    Student *st_2 = [[Student alloc] init];
-//    st_2.name = @"h-l";
-//    st_2.hobby = @"haha";
-//    st_2.email = @"1234";
-//    st_2.code = @"code";
-//
-//    [cache saveData:st];
-//    [cache saveData:st_1];
-//    [cache saveData:st_2];
-//    [cache saveData:st_1];
-//    [cache saveData:st_2];
-//    [cache saveData:st_1];
-//    [cache saveData:st_2];
-//
-//    [cache updateForEntity:st fieldValue:@"email_10" fieldName:@"email" uniqueField:@"code" uniqueValue:@"code"];
-//
-    
-    [cache deleteAllForClass:st.class];
-    NSArray *rresults = [cache queryAllDataWithEntity:st];
-//
-    for (NSDictionary *s  in rresults) {
-        NSLog(@" re = %@ " , s);
-    }
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[josn dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+    MyObjects *m = [MyObjects serializeWithJsonObject:dic];
+    NSLog(@"json = %@",[m toJsonObject]);
 }
 
 

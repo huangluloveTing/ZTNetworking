@@ -171,7 +171,10 @@ static NSDictionary<NSString *, ZTMPropertyAttribute *> * scanPropertyAttributeO
         
         //convert key name to model keys, if a mapper is provided
         NSString* jsonKeyPath = property.name;
-        
+        NSString * mapValue = [[[self class] mapProperties] valueForKey:jsonKeyPath];
+        if (mapValue) {
+            jsonKeyPath = mapValue;
+        }
         //general check for data type compliance
         id jsonValue;
         @try {
@@ -291,7 +294,6 @@ static NSDictionary<NSString *, ZTMPropertyAttribute *> * scanPropertyAttributeO
 
         //convert key name to model keys, if a mapper is provided
         NSString* key = property.name;
-
         if(property) {
             // 1) handle nils
             id value = [self valueForKey:key];
@@ -368,6 +370,7 @@ static NSDictionary<NSString *, ZTMPropertyAttribute *> * scanPropertyAttributeO
     
     return [NSDictionary dictionaryWithDictionary:jsonObject];
 }
+
 - (NSArray *) allPropertyNames {
     unsigned int count = 0;
     objc_property_t *properties = class_copyPropertyList([self class], &count);
@@ -383,6 +386,10 @@ static NSDictionary<NSString *, ZTMPropertyAttribute *> * scanPropertyAttributeO
     }
     
     return propertyNames;
+}
+
++ (NSDictionary *) mapProperties {
+    return [NSDictionary dictionary];
 }
 
 @end
