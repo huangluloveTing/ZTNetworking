@@ -38,7 +38,7 @@ static NSString *const QCloud_Bucket_Name = @"yanghesfa";
 
 @implementation MyObject
 
-+ (NSDictionary *) mapProperties {
+- (NSDictionary *) mapProperties {
     return @{
              @"ID" : @"id"
              };

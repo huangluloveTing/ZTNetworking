@@ -171,7 +171,7 @@ static NSDictionary<NSString *, ZTMPropertyAttribute *> * scanPropertyAttributeO
         
         //convert key name to model keys, if a mapper is provided
         NSString* jsonKeyPath = property.name;
-        NSString * mapValue = [[[self class] mapProperties] valueForKey:jsonKeyPath];
+        NSString * mapValue = [[self mapProperties] valueForKey:jsonKeyPath];
         if (mapValue) {
             jsonKeyPath = mapValue;
         }
@@ -388,7 +388,7 @@ static NSDictionary<NSString *, ZTMPropertyAttribute *> * scanPropertyAttributeO
     return propertyNames;
 }
 
-+ (NSDictionary *) mapProperties {
+- (NSDictionary *) mapProperties {
     return [NSDictionary dictionary];
 }
 

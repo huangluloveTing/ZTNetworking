@@ -26,19 +26,19 @@
  * such as : ID -> id
  *
  */
-+ (nullable NSDictionary *) mapProperties;   //映射特定的字段到属性，
+- (nullable NSDictionary *) mapProperties;   //映射特定的字段到属性，
 @end
 
 @interface ZTPObject : NSObject<PZTObject, NSCopying, NSCoding>
 
-+ (nullable instancetype)serializeWithJsonObject:(nullable NSDictionary *)jsonObj;
++ (nullable instancetype) serializeWithJsonObject:(nullable NSDictionary *)jsonObj;
 
-- (nullable instancetype)init;
-- (nullable instancetype)initWithJsonObject:(nullable NSDictionary *)jsonObj;
-- (nonnull NSDictionary *)toJsonObject;
+- (nullable instancetype) init;
+- (nullable instancetype) initWithJsonObject:(nullable NSDictionary *)jsonObj;
+- (nonnull NSDictionary *) toJsonObject;
 //获取对象的所有属性名称 ， 只针对第一级属性
 - (nullable NSArray *) allPropertyNames;
-+ (nullable NSDictionary *) mapProperties;
+- (nullable NSDictionary *) mapProperties;
 @end
 
 #define DP_Generic_Custom_Array_Class_Define(__className) \

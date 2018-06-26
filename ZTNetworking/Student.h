@@ -18,4 +18,6 @@
 
 @property (nonatomic , strong) NSString *code;
 
+@property (nonatomic , strong) NSString *ID;
+
 @end

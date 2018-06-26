@@ -10,4 +10,10 @@
 
 @implementation Student
 
+- (NSDictionary *) mapProperties {
+    return @{
+             @"ID" : @"id"
+             };
+}
+
 @end
