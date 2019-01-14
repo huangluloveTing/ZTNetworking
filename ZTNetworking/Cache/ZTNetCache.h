@@ -23,6 +23,10 @@
              queryValue:(NSString *)queryValue
               fieldName:(NSString *)field;
 
+- (NSArray *)queryData:(id<PZTObject>)enity
+           queryValues:(NSArray *)values
+                fields:(NSArray*)field;
+
 - (void) deleteAllForClass:(Class)class;
 
 //查询所有的数据
@@ -34,6 +38,7 @@
                fieldName:(NSString *)fieldName
              uniqueField:(NSString *)unique
              uniqueValue:(NSString *)uniqueValue;
+
 //根据数据删除
 - (void) deleteForEntity:(id<PZTObject>)entity
               fieldValue:(NSString *)fieldValue
@@ -47,10 +52,11 @@
 
 //保存离线数据的对象，遵守PZTObject 协议 ， 数据库名称根据对象的类名
 - (void) saveData:(id<PZTObject>)data;
+
 //根据id 查询对象
 - (id)   queryForEntity:(id<PZTObject>)entity
              queryValue:(NSString *)queryValue
-                 fieldName:(NSString *)field;
+              fieldName:(NSString *)field;
 
 - (void) deleteAllForClass:(Class)class;
 
@@ -66,6 +72,10 @@
                fieldName:(NSString *)fieldName
              uniqueField:(NSString *)unique
              uniqueValue:(NSString *)uniqueValue;
+
+- (NSArray *)queryData:(id<PZTObject>)enity
+           queryValues:(NSArray *)values
+                fields:(NSArray*)field;
 
 @end
 

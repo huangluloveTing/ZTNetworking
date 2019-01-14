@@ -10,6 +10,7 @@
 #import "ZTNetWorking.h"
 #import "Student.h"
 #import "ZTPObject.h"
+#import "ZTNetCache.h"
 
 #ifdef DEBUG
 static NSString *const QCloundIP = @"http://jsonplaceholder.typicode.com/posts";
@@ -25,38 +26,6 @@ static NSString *const QCloud_Secret_Access_key = @"KiR0383h1SZuwtpFUh1iEd96JRgs
 static NSString *const QCloud_Bucket_Name = @"yanghesfa";
 
 #endif
-@interface MyObject:ZTPObject
-
-@property (nonatomic , strong) NSString *userId;
-@property(nonatomic , strong) NSString *ID;
-@property (nonatomic , strong) NSString *title;
-@property (nonatomic ,strong) NSString *body;
-
-@property (nonatomic , strong) MyObject *sub;
-
-@end
-
-@implementation MyObject
-
-- (NSDictionary *) mapProperties {
-    return @{
-             @"ID" : @"id"
-             };
-}
-
-@end
-DP_Generic_Custom_Array_Class_Define(MyObject)
-
-
-@interface MyObjects:ZTPObject
-
-@property (nonatomic , strong) DPMObjectArray(MyObject) *results;
-
-@end
-
-@implementation MyObjects
-
-@end
 
 @interface ViewController ()
 
@@ -72,9 +41,8 @@ NSString *josn = @"{\"results\":[{\"userId\": 1,\"id\": 1,\"title\": \"sunt aut 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[josn dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-    MyObjects *m = [MyObjects serializeWithJsonObject:dic];
-    NSLog(@"json = %@",[m toJsonObject]);
+    
+    [self initDatas];
 }
 
 
@@ -87,6 +55,22 @@ NSString *josn = @"{\"results\":[{\"userId\": 1,\"id\": 1,\"title\": \"sunt aut 
 //    NSArray *arr2 = [[ZTHttpManager sharedManager] getCurrentUploadQueue];
 //    
 //    NSLog(@"");
+}
+
+
+
+- (void) initDatas {
+    ZTNetCache *cache = [[ZTNetCache alloc] init];
+//    for (int i = 0; i < 100; i ++) {
+//        Student *st = [[Student alloc] init];
+//        st.name = @"111";
+//        st.s_id = [NSString stringWithFormat:@"%d" , 100 + i];
+//        st.email = @"888";
+//        st.hobby = i / 20 == 0 ? @"hobby" : @"12333";
+//        [cache saveData:st];
+//    }
+    id resut =  [cache queryData:[[Student alloc] init] queryValues:@[@"hobby"] fields:@[@"hobby"]];
+    NSLog(@"%@" , resut);
 }
 
 

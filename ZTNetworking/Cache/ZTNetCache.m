@@ -52,10 +52,10 @@
     }
     
     __block NSString *sql = [NSString stringWithFormat:@"create table if not exists %@ (Id integer PRIMARY KEY AUTOINCREMENT %@);" , tableName , columnSql];
-
+    
     [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
         if ([db open]) {
-           BOOL result =  [db executeUpdate:sql];
+            BOOL result =  [db executeUpdate:sql];
             if (result) {
 #if DEBUG
                 NSLog(@"创建表 %@ 成功" , tableName);
@@ -85,11 +85,16 @@
         [db close];
     }];
 }
+- (NSArray *)queryData:(id<PZTObject>)enity
+           queryValues:(NSArray *)values
+                fields:(NSArray*)fields {
+    return [self getCacheObject:enity values:values fields:fields];
+}
 
 
 /**
  保存数据
-
+ 
  @param data return
  */
 - (void) saveDataToTable:(id<PZTObject>)data {
@@ -142,8 +147,35 @@
 }
 
 - (id) getCacheObject:(id<PZTObject>)queryObject
-                queryNmae:(NSString *)queryKey
-                fieldName:(NSString *)fieldName{
+               values:(NSArray *)values
+               fields:(NSArray *)fields {
+    NSAssert(values.count == fields.count, @"查询的字段和查询值需一样");
+    NSString *tableName = NSStringFromClass(queryObject.class);
+    NSString *sql = [self getQurySQL:fields tableName:tableName];
+    NSMutableArray *tempAr= [NSMutableArray array];
+    [self.databaseQueue inDatabase:^(FMDatabase * _Nonnull db) {
+        if ([db open]) {
+            FMResultSet *set = [db executeQuery:sql values:values error:nil];
+            while ([set next]) {
+                NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+                NSArray *columns =[queryObject allPropertyNames];
+                for (NSString *column in columns) {
+                    NSString *value = [set stringForColumn:column];
+                    [dic setValue:value forKey:column];
+                }
+                [tempAr addObject:dic];
+            }
+        }
+        
+        [db close];
+    }];
+    
+    return tempAr;
+}
+
+- (id) getCacheObject:(id<PZTObject>)queryObject
+            queryNmae:(NSString *)queryKey
+            fieldName:(NSString *)fieldName{
     NSString *tableName = NSStringFromClass(queryObject.class);
     NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@=?;" , tableName , fieldName];
     NSMutableArray *tempAr= [NSMutableArray array];
@@ -169,7 +201,7 @@
 
 /**
  根据 实体 获取所有数据
-
+ 
  @param entity 实体
  @return return
  */
@@ -200,7 +232,7 @@
 
 /**
  根据字段名称删除 数据
-
+ 
  @param entity 对象
  @param fieldValue 值
  @param fieldName 字段名
@@ -238,7 +270,7 @@
 
 /**
  判断表里的字段是否和对象一样
-
+ 
  @param table 对象
  */
 - (void) confirmTableColumnWith:(id<PZTObject>)table {
@@ -277,6 +309,22 @@
         }
         [db close];
     }];
+}
+
+
+#pragma mark - 组装sql
+// 组装查询条件
+- (NSString *) getQurySQL:(NSArray *) queryFields tableName:(NSString *)table{
+    __block NSMutableString *query = [[NSMutableString alloc] initWithString:@""];
+    [queryFields enumerateObjectsUsingBlock:^(NSString * _Nonnull field, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx != queryFields.count - 1) {
+            [query appendString:@" %@=? and "];
+        } else {
+            [query appendString:[NSString stringWithFormat:@" %@=?" , field]];
+        }
+    }];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@;", table , query];
+    return sql;
 }
 
 
