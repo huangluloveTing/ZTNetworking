@@ -69,7 +69,7 @@ NSString *josn = @"{\"results\":[{\"userId\": 1,\"id\": 1,\"title\": \"sunt aut 
 //        st.hobby = i / 20 == 0 ? @"hobby" : @"12333";
 //        [cache saveData:st];
 //    }
-    id resut =  [cache queryData:[[Student alloc] init] queryValues:@[@"hobby"] fields:@[@"hobby"]];
+    id resut =  [cache queryData:[[Student alloc] init] queryValues:@[@"hobby",@"123"] fields:@[@"hobby" , @"tt_Id"]];
     NSLog(@"%@" , resut);
 }
 

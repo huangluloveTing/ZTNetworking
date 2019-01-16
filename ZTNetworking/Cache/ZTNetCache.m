@@ -185,9 +185,14 @@
             while ([set next]) {
                 NSMutableDictionary *dic = [NSMutableDictionary dictionary];
                 NSArray *columns =[queryObject allPropertyNames];
+                NSDictionary *maps = [queryObject mapProperties];
                 for (NSString *column in columns) {
                     NSString *value = [set stringForColumn:column];
+                    NSString *newColumn = [maps valueForKey:column];
                     [dic setValue:value forKey:column];
+                    if (newColumn) {
+                        [dic setValue:value forKey:newColumn];
+                    }
                 }
                 [tempAr addObject:dic];
             }
@@ -214,9 +219,14 @@
             while ([set next]) {
                 NSMutableDictionary *dic = [NSMutableDictionary dictionary];
                 NSArray *columns =[entity allPropertyNames];
+                NSDictionary *maps = [entity mapProperties];
                 for (NSString *column in columns) {
                     NSString *value = [set stringForColumn:column];
+                    NSString *newColumn = [maps valueForKey:column];
                     [dic setValue:value forKey:column];
+                    if (newColumn) {
+                        [dic setValue:value forKey:newColumn];
+                    }
                 }
                 ZTPObject *object = [[[entity class] alloc] initWithJsonObject:dic];
                 [tempAr addObject:object];
