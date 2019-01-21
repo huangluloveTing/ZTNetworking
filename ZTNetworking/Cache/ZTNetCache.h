@@ -18,6 +18,8 @@
 //保存离线数据的对象，遵守PZTObject 协议 ， 数据库名称根据对象的类名
 - (void) saveData:(id<PZTObject>)data;
 
+//- (void) saveDatas:(NSArray<id<PZTObject>> *)datas entity:(Class<PZTObject>)entity;
+
 //根据 查询条件 查询对象
 - (id)   queryForEntity:(id<PZTObject>)entity
              queryValue:(NSString *)queryValue

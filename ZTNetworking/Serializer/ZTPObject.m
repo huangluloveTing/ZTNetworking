@@ -372,15 +372,19 @@ static NSDictionary<NSString *, ZTMPropertyAttribute *> * scanPropertyAttributeO
 }
 
 - (NSArray *) allPropertyNames {
+    return [[self class] allProperties];
+}
+
++ (nullable NSArray *) allProperties {
     unsigned int count = 0;
-    objc_property_t *properties = class_copyPropertyList([self class], &count);
+    objc_property_t *properties = class_copyPropertyList(self, &count);
     NSMutableArray *propertyNames = [NSMutableArray array];
     for (int i = 0 ; i < count; i ++) {
         objc_property_t pro = properties[i];
         NSString *proName = [NSString stringWithUTF8String:property_getName(pro)];
-//        if ([proName isEqualToString:NSStringFromClass([NSArray class])] || [proName isEqualToString:NSStringFromClass([NSMutableArray class])] || [proName isEqualToString:NSStringFromClass([NSDictionary class])] || [proName isEqualToString:NSStringFromClass([NSMutableDictionary class])] || [proName isEqualToString:NSStringFromClass([NSSet class])] || [proName isEqualToString:NSStringFromClass([NSMutableSet class])]) {
-//
-//        }
+        //        if ([proName isEqualToString:NSStringFromClass([NSArray class])] || [proName isEqualToString:NSStringFromClass([NSMutableArray class])] || [proName isEqualToString:NSStringFromClass([NSDictionary class])] || [proName isEqualToString:NSStringFromClass([NSMutableDictionary class])] || [proName isEqualToString:NSStringFromClass([NSSet class])] || [proName isEqualToString:NSStringFromClass([NSMutableSet class])]) {
+        //
+        //        }
         
         [propertyNames addObject:proName];
     }

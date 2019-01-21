@@ -24,6 +24,10 @@
     [self createTableName:data];
 }
 
+- (void) saveDatas:(NSArray<id<PZTObject>> *)datas entity:(Class<PZTObject>)entity {
+    
+}
+
 - (void) deleteAllForClass:(Class)class {
     [self deleteTableWithName:NSStringFromClass(class)];
 }
@@ -68,6 +72,7 @@
     [self confirmTableColumnWith:queryObject];
     [self saveDataToTable:queryObject];
 }
+
 
 - (void) deleteTableWithName:(NSString *)tableName {
     
@@ -159,11 +164,17 @@
             while ([set next]) {
                 NSMutableDictionary *dic = [NSMutableDictionary dictionary];
                 NSArray *columns =[queryObject allPropertyNames];
+                NSDictionary *maps = [queryObject mapProperties];
                 for (NSString *column in columns) {
                     NSString *value = [set stringForColumn:column];
+                    NSString *newColumn = [maps valueForKey:column];
                     [dic setValue:value forKey:column];
+                    if (newColumn) {
+                        [dic setValue:value forKey:newColumn];
+                    }
                 }
-                [tempAr addObject:dic];
+                ZTPObject *object = [[[queryObject class] alloc] initWithJsonObject:dic];
+                [tempAr addObject:object];
             }
         }
         
@@ -194,7 +205,8 @@
                         [dic setValue:value forKey:newColumn];
                     }
                 }
-                [tempAr addObject:dic];
+                ZTPObject *object = [[[queryObject class] alloc] initWithJsonObject:dic];
+                [tempAr addObject:object];
             }
         }
         

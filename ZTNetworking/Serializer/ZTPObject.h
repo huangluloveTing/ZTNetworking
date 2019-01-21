@@ -21,6 +21,7 @@
 - (nullable instancetype)initWithJsonObject:(nullable NSDictionary *)jsonObj;
 - (nonnull NSDictionary *)toJsonObject;
 - (nullable NSArray *) allPropertyNames;
++ (nullable NSArray *) allProperties;
 
 /**
  * such as : ID -> id
@@ -38,6 +39,7 @@
 - (nonnull NSDictionary *) toJsonObject;
 //获取对象的所有属性名称 ， 只针对第一级属性
 - (nullable NSArray *) allPropertyNames;
++ (nullable NSArray *) allProperties;
 - (nullable NSDictionary *) mapProperties;
 @end
 
