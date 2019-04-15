@@ -15,6 +15,14 @@
 
 #define REQUEST_SEP_TIME (3)
 
+
+static NSString * _Nonnull ReachabilityStatus_wift = @"ReachabilityStatus_wift";
+static NSString *ReachabilityStatus_viaWan = @"ReachabilityStatus_viaWWAN";
+static NSString *ReachabilityStatus_notWork = @"ReachabilityStatus_NotReachable";
+static NSString *ReachabilityStatus_unKnown = @"ReachabilityStatus_unknown";
+
+static NSString *ReachabilityStatus_notificationName = @"ReachabilityStatus_notificationName";
+
 @class ZTHttpManager;
 
 @protocol ZTHttpManagerInterceptor <NSObject>
@@ -75,6 +83,14 @@ typedef BOOL(^ZTGloableRequestHandler)(_Nullable id retObject , NSError * _Nulla
 @property (nonatomic , weak , nullable) id <ZTHttpManagerRequestInterceptor> requestHandler;
 
 + (nonnull instancetype) sharedManager;
+
+
+/**
+ * 开启网络实时监听
+ * 通过发送通知
+ * ReachabilityStatus_wift  ReachabilityStatus_viaWan ReachabilityStatus_notWork ReachabilityStatus_unKnown
+ */
+- (void) listenReachable;
 
 /**
  带URL初始化 (AFNetWorking3.2 使用)

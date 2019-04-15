@@ -743,4 +743,51 @@ static ZTHttpManager *manager = nil;
                                 Completion:completion];
 }
 
+
+- (void) listenReachable {
+    //1:创建网络监听者
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager manager];
+    //2:获取网络状态
+    /*
+     AFNetworkReachabilityStatusUnknown          = 未知网络，
+     AFNetworkReachabilityStatusNotReachable     = 没有联网
+     AFNetworkReachabilityStatusReachableViaWWAN = 蜂窝数据
+     AFNetworkReachabilityStatusReachableViaWiFi = 无线网
+     */
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+                [[NSNotificationCenter defaultCenter] postNotificationName:ReachabilityStatus_notificationName
+            object:@{
+                     ReachabilityStatus_notificationName:ReachabilityStatus_unKnown
+                     }];
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"没有联网");
+                [[NSNotificationCenter defaultCenter] postNotificationName:ReachabilityStatus_notificationName
+                    object:@{
+                             ReachabilityStatus_notificationName:ReachabilityStatus_notWork
+                             }];
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                [[NSNotificationCenter defaultCenter] postNotificationName:ReachabilityStatus_notificationName
+                    object:@{
+                             ReachabilityStatus_notificationName:ReachabilityStatus_viaWan
+                             }];
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                [[NSNotificationCenter defaultCenter] postNotificationName:ReachabilityStatus_notificationName
+                    object:@{
+                             ReachabilityStatus_notificationName:ReachabilityStatus_wift
+                             }];
+                break;
+            default:
+                break;
+        }
+    }];
+    
+    //开启网络监听
+    [manager startMonitoring];
+}
+
 @end
