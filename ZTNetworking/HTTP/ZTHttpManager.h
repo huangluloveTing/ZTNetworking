@@ -16,12 +16,11 @@
 #define REQUEST_SEP_TIME (3)
 
 
-static NSString * _Nonnull ReachabilityStatus_wift = @"ReachabilityStatus_wift";
-static NSString *ReachabilityStatus_viaWan = @"ReachabilityStatus_viaWWAN";
-static NSString *ReachabilityStatus_notWork = @"ReachabilityStatus_NotReachable";
-static NSString *ReachabilityStatus_unKnown = @"ReachabilityStatus_unknown";
-
-static NSString *ReachabilityStatus_notificationName = @"ReachabilityStatus_notificationName";
+static NSString * const ReachabilityStatus_wift = @"ReachabilityStatus_wift";
+static NSString * const ReachabilityStatus_viaWan = @"ReachabilityStatus_viaWWAN";
+static NSString * const ReachabilityStatus_notWork = @"ReachabilityStatus_NotReachable";
+static NSString * const ReachabilityStatus_unKnown = @"ReachabilityStatus_unknown";
+static NSString * const ReachabilityStatus_notificationName = @"ReachabilityStatus_notificationName";
 
 @class ZTHttpManager;
 
